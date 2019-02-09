@@ -1,17 +1,44 @@
-<!Doctype>
+<!Doctype html>
+
 <html>
-  <head>
-    <style>
-      body{
-        background-color:orange;
-      }
-    </style>
-  </head>
-<!--# vrushali-d.github.io
-Project website-->
-  <body>
-    <h1>Hello World!!</h1>
-    <p>This is my website</p>
-      </body>
-    </html>
-  
+	<head>
+		<title>This is my web page.</title>
+<style>
+	#heading{
+		background-color:blue;
+		color:white;
+		margin-top:10px;
+		border:3px solid cyan;
+		text-align:center;
+	}
+	body
+	{
+		background-color:orange;
+	}
+</style>
+	</head>
+	<body>
+		<div id="heading">
+		<h1>Welcome to my web page!</h1>
+		</div>
+		<p id="message">Click on the button and see magic!</p>
+		<h2 id="change"></h2>
+		<div id="content">
+			<button id="btnMagic">Click Me! </button>
+		</div>
+	<script>
+		var btnEl=document.getElementById("btnMagic");
+		console.log(btnEl);
+		var onClickButton = function()
+		{
+			
+			var headEl=document.getElementById("change");
+			console.log(headEl);
+			headEl.innerHTML="Hello!<br>Nice to meet you.<br>:)<br>";
+			btnEl.innerHTML="I am happy you Clicked me!";
+		};
+		btnEl.addEventListener("click",onClickButton);
+	</script>
+	</body>
+
+</html>  
