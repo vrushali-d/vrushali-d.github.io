@@ -22,6 +22,8 @@
 		<h1>Welcome to my web page!</h1>
 		</div>
 		<p id="message">Click on the button and see magic!</p>
+		<label>Enter your name:</label>
+		<input id="name" type=text name="name" value="">
 		<h2 id="change"></h2>
 		<div id="content">
 			<button id="btnMagic">Click Me! </button>
@@ -31,10 +33,10 @@
 		console.log(btnEl);
 		var onClickButton = function()
 		{
-			
+			var nameEl=document.getElementById("name");
 			var headEl=document.getElementById("change");
 			console.log(headEl);
-			headEl.innerHTML="Hello!<br>Nice to meet you.<br>:)<br>Gayatri";
+			headEl.innerHTML="Hello!<br>Nice to meet you.<br>:)<br>"+nameEl.value;
 			btnEl.innerHTML="I am happy you Clicked me!";
 		};
 		btnEl.addEventListener("click",onClickButton);
