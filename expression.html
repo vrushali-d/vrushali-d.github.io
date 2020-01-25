@@ -30,7 +30,18 @@
 	{
 		let degreeEl=document.getElementById("degree");
 		console.log(degreeEl.value);
+		if(isNaN(degreeEl.value))
+		{	
+			alert("Invalid Input");
+			return;
+		}
+		console.log(typeof(degree.value));
 		let d=Number(degreeEl.value);
+		if(d<0 || !Number.isInteger(d))
+		{
+			alert("Invalid Input");
+			return;
+		}
 		let exEl=document.getElementById("expression");
 		console.log(exEl);
 		while(d)
@@ -112,6 +123,17 @@
 	function bisection()
 	{
 		console.log("you called me");
+		/*To check all text boxes contain valid input*/
+		let textEls=document.getElementsByClassName("box");
+		for(let i=0;i<textEls.length;i+=1)
+		{
+			if(isNaN(textEls[i].value))
+			{
+				alert("Invalid Input");
+				return;
+			}
+		}
+
 		bodyEl=document.getElementById("body");
 		let tableEl=document.createElement("table");
 		let rowEl=document.createElement("tr");
@@ -131,6 +153,11 @@
 
 		a=Number(document.getElementById("aInput").value);
 		b=Number(document.getElementById("bInput").value);
+		if(isNaN(a) || isNaN(b))
+		{
+			alert("Invalid Input");
+			return;
+		}
 		//mid=(a+b)/2;
 		//midVal=calculate(mid);
 		tol=100;//Some positive number > 0.00005
