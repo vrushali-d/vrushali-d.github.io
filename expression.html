@@ -1,0 +1,179 @@
+<!Doctype html>
+<html>
+<head>
+<style>
+	table,tr,td,th{
+		border:1px solid black;
+		 border-collapse: collapse;
+	}
+	td{
+		padding:5px;
+		font-family:monospace;
+	}
+</style>
+</head>
+
+<body id="body">
+	<h1>Calculate root of given expression using bisection method.</h1>
+	<label>Enter degree of polynomial</label>
+	<input type="text" id="degree">
+	<div>
+		<button id="done" onClick="show()">Submit</button>
+	</div>
+	<div id="expression">
+
+	</div>
+	
+
+<script>
+	function show()
+	{
+		let degreeEl=document.getElementById("degree");
+		console.log(degreeEl.value);
+		let d=Number(degreeEl.value);
+		let exEl=document.getElementById("expression");
+		console.log(exEl);
+		while(d)
+		{
+			let textBoxEl=document.createElement("input");
+			textBoxEl.type="text";
+			textBoxEl.className="box";
+			textBoxEl.style.width="20px";
+			exEl.appendChild(textBoxEl);
+			let coeffEl=document.createTextNode("*x^"+d+" +"); 
+			exEl.appendChild(coeffEl);
+			d-=1;
+		}
+
+		let textBoxEl=document.createElement("input");
+		textBoxEl.type="text";
+		textBoxEl.className="box";
+		textBoxEl.style.width="20px";
+		exEl.appendChild(textBoxEl);
+		
+
+		//textEl=document.createTextNode("Enter value of x:");
+		//textInEl=document.createElement("input");
+		//textInEl.type="text";
+		//textInEl.id="xInput";
+
+		calcButtonEl=document.createElement("button");
+		calcButtonEl.innerHTML="calculate";
+		calcButtonEl.addEventListener("click",bisection);
+		bodyEl=document.getElementById("body");
+		
+		aInputDevEl=document.createElement("div");
+		aTextEl=document.createTextNode("Enter value of a for which p(x) is negative:");
+		aTextBox=document.createElement("input");
+		aTextBox.type="text";
+		aTextBox.id="aInput";
+
+		aInputDevEl.appendChild(aTextEl);
+		aInputDevEl.appendChild(aTextBox);
+
+		bInputDevEl=document.createElement("div");
+		bTextEl=document.createTextNode("Enter value of b for which p(x) is positive");
+		bTextBox=document.createElement("input");
+		bTextBox.type="text";
+		bTextBox.id="bInput";
+
+		bInputDevEl.appendChild(bTextEl);
+		bInputDevEl.appendChild(bTextBox);
+
+		//bodyEl.appendChild(textEl);
+		//bodyEl.appendChild(textInEl);
+		bodyEl.appendChild(aInputDevEl);
+		bodyEl.appendChild(bInputDevEl);
+		bodyEl.appendChild(calcButtonEl);
+	}
+	function calculate(x)
+	{
+		console.log("hey there");
+		let textEls=document.getElementsByClassName("box");
+		let sum=0;
+		let expo=Number(document.getElementById("degree").value);
+		//let xValEl=document.getElementById("inputX");
+		//let x=Number(xValEl.value);
+		for(let i=0;i<textEls.length-1;i+=1,expo-=1)
+		{
+			console.log(textEls[i].value);
+			sum+=Math.pow(x,expo)*Number(textEls[i].value);
+		}
+		sum+=Number(textEls[textEls.length-1].value);
+		console.log("Expression value when x=2 is:"+sum);
+		//let bodyEl=document.getElementById("body");
+		//let outputEl=document.createTextNode("Expression value when x="+x+" is:"+sum);
+	//	bodyEl.appendChild(document.createElement("div");
+	//	bodyEl.appendChild(outputEl);
+
+		return sum;
+	}
+
+	function bisection()
+	{
+		console.log("you called me");
+		bodyEl=document.getElementById("body");
+		let tableEl=document.createElement("table");
+		let rowEl=document.createElement("tr");
+		let heading=["Sr.No","a","b","p(a)","p(b)","mid","p(mid)"];
+		//console.log(heading);
+		tableEl.appendChild(rowEl);
+		for(let i=0;i<heading.length;i++)
+		{
+			let headEl=document.createElement("th");
+			headEl.innerHTML=heading[i];
+			rowEl.appendChild(headEl);
+		
+		}
+
+		/*Actual logic*/
+		let a,b,pa,pb,mid,midVal,iter=0,tol;
+
+		a=Number(document.getElementById("aInput").value);
+		b=Number(document.getElementById("bInput").value);
+		//mid=(a+b)/2;
+		//midVal=calculate(mid);
+		tol=100;//Some positive number > 0.00005
+		pa=calculate(a);
+		pb=calculate(b);
+		if(pa > 0 || pb < 0)
+		{
+			bodyEl.appendChild(document.createTextNode("Invalid Input"));//error
+			return;
+		}
+		while(tol > 0.00005)
+		{
+			iter+=1;
+			mid=(a+b)/2;
+			midVal=calculate(mid);
+			tol=Math.abs(0-midVal);
+			pa=calculate(a);
+			pb=calculate(b);
+			let op=[iter,a,b,pa,pb,mid,midVal];
+			let rowEl=document.createElement("tr");
+			for(let i=0;i<op.length;i++)
+			{
+				let colEl=document.createElement("td");
+				colEl.innerHTML=op[i];
+				rowEl.appendChild(colEl);
+			}
+			tableEl.appendChild(rowEl);
+			
+			if(midVal*pb < 0)
+				a=mid;
+			else
+				b=mid;
+			//mid=(a+b)/2;
+			//midVal=calculate(mid);
+			//tol=Math.abs(0-midVal);
+		}
+
+
+
+		bodyEl.appendChild(tableEl);
+
+	}
+</script>
+</body>
+
+</html>
