@@ -1,0 +1,130 @@
+<!Doctype html>
+<html>
+<head>
+	<title>Python language for g3 </title>
+	<style>
+	#container{
+		width:70%;
+		align:center;
+		background-color:green;
+		padding:50px;
+		margin-left:50px;
+		overflow:auto;
+	}
+	#heading{
+		font-family:monospace;
+		color:white;
+		
+	}
+	#headWrapper{
+		padding:20px;
+		margin:10px;
+		align-content:centre;
+	}
+	#para{
+		color:white;
+		font-size:20px;
+	}
+	h3{
+		font-family:monospace;
+	}
+	h2{
+		font-family:monospace;
+	}
+	h1{
+		font-family:monospace;
+		font-size:50px;
+
+	}
+	body{
+		align-content:center;
+		background-color:#135b94;
+	}
+	.code{
+				background-color:black;
+				overflow:auto;
+	}
+	</style>
+
+</head>
+
+<body>
+	<div id="container">
+		<div id="headWrapper">
+			<h1 id="heading">Python Language learning Articles for Gayatri</h1>
+		</div>
+		<div id="para">
+			<strong>12/07/2020</strong>
+			<h2>Hello G3</h2>
+			
+			<em>Note:I want to improve my writting skill so I am writting this.</em>
+			<p>
+				So today's topic of discussion is keyword break.<br>
+				To recall keywords are words which are known to language<br>
+				and have some meaning for language and we cannot use them as variable names.<br>
+				You are familiar with loops as i know you have written some programs.<br>
+			</p>
+			<h3>Example of while loop.</h3>
+ 			<p>Syntax:</br>
+				while condition:</br>
+				statement1</br>
+				.</br>
+				.</br>
+				.</br>
+
+			You may ask what is syntax?</br>
+			Syntax is like grammar of language.<br>
+			It is set of rules of how to write program in particular language.
+			</p>
+
+			<h3>Actual Code:</h3>
+			<div class="code">
+<pre>
+<code>
+#Write a python script to print first 10 natural numbers
+#This and above line is comment
+#You know what is comment.If you don't know just google it!
+i=0
+	while i<10:
+		print(str(i+1)+'\n')
+		i=i+1 #try to remove this line and see what happens
+</code>
+</pre>
+</div>
+
+<h3>Hands on work:</h3>
+<ul><li>Write the above code using for loop</li></ul>
+<p>
+In case of above code you know when to stop.</br>But what if exit of loop depands on user input or some other computation?</br>
+This is where break keyword used.</br>
+
+Let's write a program to fool the user!</br>
+Program will  ask the user "are you mad?"</br>
+ if user says "no" then program will ask same question till user accepts she/he is actually mad.
+</p>
+<div class="code">
+<pre>
+<code>
+while True:
+	x=int(input("Are you mad?\n1.Yes\n2.No\n:"));
+	if x==1:
+		break
+</code>
+</pre>
+</div>
+<strong>Run this code on your PC</strong>
+
+<h3>Hands on work:</h3>
+<ul>
+<li>Write program which will ask for number and exits only if -ve number is given as input
+<li>Write program which will ask for number and exits only if even number is given as input
+</ul>
+<footer>
+Give me feedback on this article!
+Thank you!
+</footer>
+		</div>	
+	</div>
+</body>
+
+</html>
