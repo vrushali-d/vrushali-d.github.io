@@ -5,35 +5,64 @@
 		<title>This is my web page.</title>
 <style>
 	#heading{
+		
 		background-color:blue;
 		color:white;
-		margin-top:10px;
+		padding:10px;
 		border:3px solid cyan;
 		text-align:center;
+		
 	}
 	body
 	{
 		background-color:orange;
+		margin:0px;
+		padding:0px;
 	}
 	#myLinks{
+		display:flex;
+		padding:10px;
 		background-color:green;
-		width:20%;
-		height:20%;
-		
+		flex:1;
 	}
+	#container{
+		width:80%;
+		margin:auto;
+		
+		display:flex;
+		border:1px solid;
+		flex:1;
+		flex-direction:column;
+	}
+	#innerContainer{
+		display:flex;
+		flex:1;
+		flex-direction:row;
 
+	}
+	#magic{
+		
+		flex:1;
+		flex-direction:row;
+		background-color:yellow;
+		padding:10px;
+	}
 </style>
 	</head>
 	<body>
+	<div id="container">
 		<div id="heading">
-		<h1>Welcome to my web page!</h1>
+			<h1>Welcome to Vrushali's web page!</h1>
 		</div>
-		<p id="message">Click on the button and see magic!</p>
-		<label>Enter your name:</label>
-		<input id="name" type=text name="name" value="">
-		<h2 id="change"></h2>
-		<div id="content">
-			<button id="btnMagic">Click Me! </button>
+		<div id="innerContainer">
+		<div id="magic">
+			<p id="message">Click on the button and see magic!</p>
+			<label>Enter your name:</label>
+			<input id="name" type=text name="name" value="">
+			<h2 id="change"></h2>
+			<div id="content">
+				<button id="btnMagic">Click Me! </button>
+			</div>
 		</div>
 		<div id="myLinks">
 			<h4>Some links...</h4>
@@ -42,7 +71,8 @@
 				<li><a href="tutorial.html">Python keyword break</a></li>
 			</ul>
 		</div>
-
+		</div>
+	</div>
 	<script>
 		var btnEl=document.getElementById("btnMagic");
 		console.log(btnEl);
