@@ -2,23 +2,72 @@
 <html>
 <head>
 	<style>
-		canvas{
+		#mycanvas1{
 			border:1px solid;
 			margin-left:30%;
+		}
+		#wraper{
+			margin:auto;
+			background-color:green;
+			width:70%;
+			overflow:auto;
+		}
+		body{
+			margin:0px;
+			padding:0px;
+			background-color:black;
 		}
 	</style>
 </head>
 <body>
-<h1>Here are some projects made using processing.js which I learned at khan academy...</h1>
+<div id="wraper">
+<div class="canvas" >
+<canvas id="mycanvas3" ></canvas>
+</div>
+
 <div class="canvas" >
 <canvas id="mycanvas1" ></canvas>
 </div>
 <!--<div class="canvas">
 <canvas id="mycanvas2"></canvas>
 </div>-->
+</div>
 </body>
 
 <script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js"></script>
+
+<script type="text/processing" data-processing-target="mycanvas3">
+void setup()
+{
+  size(950,200);
+};
+var x=0;
+var z=0;
+var flag=1;
+draw=function(){
+	if(flag){
+		x+=2;	
+	}
+	else{
+		x-=2;
+	}
+    	background(x,100,150);
+	textSize(30);	
+	fill(255, 255, 255);
+	text("Here are some projects made using processing.js which I learned at khan academy...",10,50,800,200);
+	//console.log("function called");
+
+
+	if(x>=255){
+		flag=0;
+		
+	}
+	if(x<=0){
+		flag=1;
+	}
+};
+
+</script>
 <script type="text/processing" data-processing-target="mycanvas1">
 void setup()
 {
