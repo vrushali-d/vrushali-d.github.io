@@ -5,6 +5,7 @@
 		#mycanvas1{
 			border:1px solid;
 			margin-left:30%;
+			
 		}
 		#wraper{
 			margin:auto;
@@ -17,17 +18,20 @@
 			padding:0px;
 			background-color:black;
 		}
+		.canvas{
+			margin:auto;
+		}	
 	</style>
 </head>
 <body>
 <div id="wraper">
-<div class="canvas" >
-<canvas id="mycanvas3" ></canvas>
-</div>
+	<div class="canvas" >
+		<canvas id="mycanvas3" ></canvas>
+	</div>
 
-<div class="canvas" >
-<canvas id="mycanvas1" ></canvas>
-</div>
+	<div class="canvas" >
+		<canvas id="mycanvas1" ></canvas>
+	</div>
 <!--<div class="canvas">
 <canvas id="mycanvas2"></canvas>
 </div>-->
@@ -39,7 +43,7 @@
 <script type="text/processing" data-processing-target="mycanvas3">
 void setup()
 {
-  size(950,200);
+  size(920,200);
 };
 var x=0;
 var z=0;
@@ -72,6 +76,8 @@ draw=function(){
 void setup()
 {
   size(400,400);
+  drawScene1();
+
   //background(125);
   //fill(255);
   //noLoop();
@@ -79,91 +85,200 @@ void setup()
   //textFont(fontA, 14);
   //var side=50;  
 }
-/*Quotes*/
-var flag=0;
-var drawButton=function()
-{
+/*
+This program is like quote book.
+23/01/2021
+How it works?
+Each quote is written as separate function like drawScene1
+currentScene variable keeps track of current Scene
+when mouse is clicked it will check what current scene is and the
+change the scene depending of previous or next button pressed
+*/
+var currentScene;
+var drawScene1=function(){
+    currentScene=1;
+    background(0, 170, 255);
     fill(255, 0, 0);
-    rect(100,250,150,100);
+    rect(110,250,150,100);
     fill(255, 255, 255);
-    text("Start",130,290,150,100);
-    if(mouseX>=100 && mouseX<=350 && mouseY>=250 && mouseY<=350)
-    {
-        fill(19, 75, 207);
-        rect(100,250,150,100);
-        fill(255, 255, 255);
-        text("Start",130,290,150,100);
-        if(mousePressed)
-        {
-            flag=1;
-            mouseX=30;
+    textSize(40);
+    text("Here are some quotes which i like!",20,50,300,300);
+    text("Start",140,290,150,100);
+};
+
+var drawNextButton = function(){
+    fill(255, 0, 0);
+    rect(300,350,60,40);
+    fill(235, 223, 223);
+    textSize(20);
+    text("Next",305,360,50,40);
+};
+
+var drawPreviousButton = function(){
+    fill(255, 0, 0);
+    rect(5,350,85,40);
+    fill(235, 223, 223);
+    textSize(20);
+    text("Previous",10,360,70,40);
+};
+
+
+var drawScene2 = function(){
+  currentScene=2;    
+  background(217, 39, 137);  
+  fill(238, 237, 242);
+  textSize(40);
+  text("You only have to know one thing:You can learn anything!-Khan Academy\n",20,40,350,300);
+  drawNextButton();
+  drawPreviousButton();
+};
+
+var drawScene3 = function(){
+  currentScene=3;    
+  background(217, 39, 137);  
+  fill(238, 237, 242);
+  textSize(40);
+  text("The most beautiful things in the world cannot be seen or touched,they must be felt with the heart.",20,40,350,300);
+  drawNextButton();
+  drawPreviousButton();
+};
+
+var drawScene4 = function(){
+  currentScene=4;    
+  background(217, 39, 137);  
+  fill(238, 237, 242);
+  textSize(35);
+  text("Friends:People who make you laugh a little louder,your smile a little brighter and your life a little better.",20,40,300,300);
+  drawNextButton();
+  drawPreviousButton();
+};
+
+var drawScene5 = function(){
+  currentScene=5;    
+  background(217, 39, 137);  
+  fill(238, 237, 242);
+  textSize(35);
+  text("Efforts may fail but don't fail to make efforts!",20,40,300,300);
+  drawNextButton();
+  drawPreviousButton();
+};
+
+var drawScene6 = function(){
+  currentScene=6;    
+  background(217, 39, 137);  
+  fill(238, 237, 242);
+  textSize(35);
+  text("You can't start next chapter of your life if you keep re-reading last one.",20,40,300,300);
+  drawNextButton();
+  drawPreviousButton();
+};
+
+
+
+
+var isMouseOnNextButton = function(){
+    if(mouseX>=300 && mouseX<=360 && mouseY>=350 && mouseY<=390){
+        return 1;
+    }
+    return 0;
+};
+
+var isMouseOnPrevButton = function(){
+    if(mouseX>=5 && mouseX<=90 && mouseY>=350 && mouseY<=390){
+        return 1;
+    }
+    return 0;
+};
+
+
+
+mouseClicked = function(){
+    if(currentScene===1){
+        if(mouseX>=110 && mouseX<=350 && mouseY>=250 && mouseY<=350){
+            drawScene2();
+        }
+    }
+    else if(currentScene===2){
+        if(isMouseOnNextButton()===1){
+            drawScene3();
+        }else if(isMouseOnPrevButton()===1){
+            drawScene1();
+        }
+    }
+    
+    else if(currentScene===3){
+        if(isMouseOnNextButton()===1){
+            drawScene4();
+        }else if(isMouseOnPrevButton()===1){
+            drawScene2();
+        }
+    }
+    else if(currentScene===4){
+        if(isMouseOnNextButton()===1){
+            drawScene5();
+        }else if(isMouseOnPrevButton()===1){
+            drawScene3();
+        }
+    }
+    else if(currentScene===5){
+        if(isMouseOnNextButton()===1){
+            drawScene6();
+        }else if(isMouseOnPrevButton()===1){
+            drawScene4();
+        }
+    }
+    else if(currentScene===6){
+        if(isMouseOnNextButton()===1){
+            drawScene1();
+        }else if(isMouseOnPrevButton()===1){
+            drawScene5();
         }
     }
 };
+
 draw= function() {
-    background(0, 170, 255);
-    textSize(40);
-    fill(255, 255, 255);
-    text("Here are some quotes which i like!",20,50,300,300);
-    drawButton();
-    
-    if(flag)
-    {
-        background(217, 39, 137);
-        stroke(61, 120, 24);
-        strokeWeight(10);
-        line(20,350,380,350);
-        noStroke();
-        for(var i=20;i<=380;i+=72)
-        {
-            
-            fill(255, 0, 0);
-            ellipse(i,350,40,40);
-        }
-        
-        if(mouseX>=15 && mouseY<=370){
-            fill(242, 243, 247);
-            ellipse(mouseX,350,40,40);
-            textSize(40);
+    if(currentScene===1){
+        if(mouseX>=110 && mouseX<=350 && mouseY>=250 && mouseY<=350){
+            fill(18, 74, 7);
+            rect(110,250,150,100);
             fill(255, 255, 255);
-            if(mouseX>=15 && mouseX<=72)
-            {
-                fill(238, 237, 242);
-                text("You have to know only one thing:You can learn anything!\n",20,40,300,300);
-            }
-            if(mouseX>72 && mouseX<=152)
-            {
-                textSize(35);
-                //fill(66, 34, 227);
-                text("The most beautiful things in the world cannot be seen or touched,they must be felt with the heart.",20,40,300,300);
-            
-            }
-            if(mouseX>152 && mouseX<=216)
-            {
-                textSize(35);
-                //fill(66, 34, 227);
-                text("Friends:People who make you laugh a little louder,your smile a little brighter and your life a little better.",20,40,300,300);
-            }
-            if(mouseX>216 && mouseX<=288)
-            {
-                textSize(35);
-                //fill(66, 34, 227);
-                text("Arise,wake up,open your eyes,step out,move from where you are to where you need to be!",20,40,300,300);
-            }
-            if(mouseX>288 && mouseX<=360)
-            {
-                //fill(66, 34, 227);
-                text("You can't start next chapter of your life if you keep re-reading last one.",20,40,300,300);
-            }
-            if(mouseX>360)
-            {
-                //fill(66, 34, 227);
-                text("Efforts may fail but don't fail to make efforts!",20,40,300,300);
-            }
-            
+            textSize(40);
+            text("Start",140,290,150,100);
         }
-    }    
+        else{
+            fill(237, 43, 29);
+            rect(110,250,150,100);
+            fill(255, 255, 255);
+            textSize(40);
+            text("Start",140,290,150,100);
+        }
+    }
+    else{
+        if(mouseX>=300 && mouseX<=360 && mouseY>=350 && mouseY<=390){
+            fill(18, 74, 7);
+            rect(300,350,60,40);
+            fill(235, 223, 223);
+            textSize(20);
+            text("Next",305,360,50,40);
+        }
+        else{
+            drawNextButton();
+        }
+        if(mouseX>=5 && mouseX<=90 && mouseY>=350 && mouseY<=390){
+            fill(18, 74, 7);
+            rect(5,350,85,40);
+            fill(235, 223, 223);
+            textSize(20);
+            text("Previous",10,360,70,40);
+        }
+        else{
+            drawPreviousButton();
+        }
+    }
 };
+
+
+
 </script>
 <script type="text/processing" data-processing-target="mycanvas2">
 void setup()
