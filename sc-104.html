@@ -9,14 +9,18 @@
 		}
 
 		#container{
-			width:70%;
+			width:80%;
 			align:center;
 			background-color:green;
-			padding:50px;
+			
 			margin:auto;
 			overflow:auto;
+			display:flex;
+			flex:1;
+			flex-direction:column;
 		}
 		#heading{
+			display:flex;
 			font-family:monospace;
 			color:white;
 			
@@ -26,19 +30,55 @@
 			margin:10px;
 			align-content:centre;
 		}
+
+		#main{
+			display:flex;
+			flex:1;
+			flex-direction:row;
+
+		}
+		#right{
+			color:white;
+			background:rgb(233,30,99);
+			display:flex;			
+			flex:1;
+			padding:30px;
+			border-left:5px dashed white;
+			flex-direction:column;
+		}
+		#left{
+			background:yellow;
+			display:flex;			
+			flex:2;
+			flex-direction:column;
+			padding:30px;
+		}
+		#footer{
+			color:white;
+			padding:5px;
+			font-family:monospace;
+		}
 		
 		</style>
 	</head>
 	<body>
 		<div id="container">
+			
 			<div id="headWrapper">
 				<h1 id="heading">SC-104 Question Papers and useful resources.</h1>
 			</div>
+			<div id="main">
+			<div id="left">
 			<div id="qpapers">
 				<h1>Links for previous year question papers:</h1>
 				<ul>
-						<li><a href="https://drive.google.com/file/d/1bM7rBY-azgw6o-kV_Klygr9-7YoV3dL7/view?usp=sharing">Diagnostic Test 24/08/2019</a></li>
-					<li><a href="https://drive.google.com/file/d/1bKaPhjN4kjyDSb588uwfkYOLK4S-236Z/view?usp=sharing">SC-104 Test1 6/09/2019</a></li>
+						<li><a href="https://drive.google.com/file/d/1bM7rBY-azgw6o-kV_Klygr9-7YoV3dL7/view?usp=sharing">Diagnostic Test </a></li>
+						<li><a href="https://drive.google.com/file/d/1bKaPhjN4kjyDSb588uwfkYOLK4S-236Z/view?usp=sharing">SC-104 Test1 </a></li>
+						<li><a href="https://drive.google.com/file/d/1I20gwtYuJyYYkbf6wKm1uAhSUeUTd3EA/view?usp=drivesdk">SC-104 Mid Semester 1 Exam</a></li>
+						<li><a href="https://drive.google.com/file/d/1HwMvZa0gcDiTegSbFyodxXamfJ09P_dC/view?usp=drivesdk
+">SC-104 Mid Semester 2 Exam</a></li>
+						<li><a href="https://drive.google.com/file/d/1HtMa3rruTuia2ghRmPVZTTuyPp930OBa/view?usp=drivesdk">SC-104 Mid Semester 3 Exam</a></li>
+						<li><a href="https://drive.google.com/file/d/1I6nDAV6ID69tFEqp0igO6d3p6D_jHYVe/view?usp=drivesdk">SC-104 End Semester Exam</a></li>
 				</ul>
 
 			</div>
@@ -70,7 +110,29 @@
 					<li><a href="https://www.ck12.org/book/ck-12-calculus/">https://www.ck12.org/book/ck-12-calculus/</a></li>
 				</ul>
 
-			</div>	
+			</div>
+		</div><!--left-->
+		<div id="right">
+			<h1>Homework</h1>
+			<div>
+			<p>
+			<div>06/02/2020</div>
+			Solve Question 1 from first 2 links of question papers given on left.
+
+			</p>
+			</div>
+		</div>	
+		
+		</div><!--main-->
+		<div id="footer">
+			<p>
+				This is webpage for SC-104 Problem Solving class<br>
+				Check this page for Homework.<br>
+				
+				
+			</p>
+			<h2>Thanks to:Mugdha and Abdullah Sir</h2>
+		</div>		
 		</div>
 
 	</body>
