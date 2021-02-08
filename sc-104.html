@@ -58,10 +58,30 @@
 			padding:30px;
 		}
 		#footer{
+			display:flex;
+			flex:1;
+			flex-direction:row;
 			color:white;
-			padding:5px;
+			/*padding:5px;*/
 			font-family:monospace;
 			font-size:15px;
+		}
+		#contributors{
+			display:flex;
+			flex-direction:column;
+			flex:1;
+			padding:30px;
+			/*background:rgb(233,30,99);*/
+			border-left:5px dashed white;
+			/*border-top:5px dashed white;*/
+			/*font-family:monospace;*/
+		}
+		#info{
+			display:flex;
+			flex-direction:column;
+			flex:2;
+			padding:30px;
+			/*background:rgb(2,0,155);*/
 		}
 		span{
 			font-weight:bold;
@@ -150,14 +170,22 @@
 		
 		</div><!--main-->
 		<div id="footer">
-			<p>
-				This is webpage for SC-104 Problem Solving class<br>
-				Check this page for Homework.<br>
-				<span>*If you want to improve this website then post pull request on Github.<span><br>
-				UserName on github:<a href="https://github.com/vrushali-d/vrushali-d.github.io">vrushali-d</a> 
-				
-			</p>
-			<h2>Thanks to:Mugdha and Abdullah Sir</h2>
+			<div id="info">
+				<p>
+					This is webpage for SC-104 Problem Solving class<br>
+					Check this page for Homework.<br>
+					<span>*If you want to improve this website then post pull request on Github.<span><br>
+					UserName on github:<a href="https://github.com/vrushali-d/vrushali-d.github.io">vrushali-d</a> 
+					
+				</p>
+				<h2>Thanks to:Mugdha and Abdullah Sir</h2>
+			</div>
+			<div id="contributors">
+				<h2>List of code contributors</h2>
+				<ul>
+					<li>Suraj</li>
+				</ul>
+			</div>
 		</div>		
 		</div>
 
