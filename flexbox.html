@@ -1,0 +1,234 @@
+<!Doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Flexbox CSS</title>  
+        <style>
+            body{
+                background-color: gainsboro;
+            }
+            #wraper {
+                margin:auto;
+                width:80%;
+                display:flex;
+                flex-direction: column;
+                /*justify-content: center;*/
+                /*align-items: center;*/
+                /*background-color: rgb(35, 48, 56);*/
+            }
+            #container{
+                background-color: rgb(55, 154, 211);
+                height:400px;
+                
+                display:flex;
+                /*flex:1;*/
+                justify-content: flex-start;
+                flex-direction: row;
+                border:1px solid;
+                font-family: monospace;
+            }
+            #box1{
+                margin:1px;
+                background-color:#d62828;
+                display:flex;
+                width: 100px;
+                height: 100px;
+                justify-content: center;
+                align-items: center;
+                /*flex:1;*/
+            }
+            #box2{
+                margin: 1px;
+                background-color:#bfd200;
+                display:flex;
+                width: 100px;
+                height: 100px;
+                justify-content: center;
+                align-items: center;
+                /*flex:1;*/
+            }
+            #box3{
+                margin: 1px;
+                background-color: #5a189a;
+                display:flex;
+                width: 100px;
+                height: 100px;
+                justify-content: center;
+                align-items: center;
+                /*flex:1;*/
+            }
+            #title{
+                /*background-color: brown;*/
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            #control{
+                /*background-color: azure;*/
+                font-size: 25px;
+            }
+            button{
+                background-color: rgb(49, 175, 91);
+                padding: 5px;
+            }
+        </style>      
+    </head>
+    <body>
+        <div id="wraper">
+            <div id="title">
+                <div>
+                    <h1>CSS Flexbox Layout😀</h1>
+                    <p>You can use following buttons to play with flexbox layout alignment and spacing!</p>
+                </div>
+            </div>
+            <div id="container">
+                <div id="box1">
+                    <h2>1</h2>
+                </div>
+                <div id="box2">
+                    <h2>2</h2>
+                </div>
+                <div id="box3">
+                    <h2>3</h2>
+                </div>
+            </div>
+            <div id="control">
+                <h2>Hey,Check out various controls here</h2>
+                <div>
+                    <span>Flex Direction:</span>
+                    <!--
+                        <input type="radio" name="flex-direction" value="row" checked/>
+                    <label for="row layout">Row</label>
+                    <input type="radio" name="flex-direction" value="column"/>
+                    <label for="row layout">Column</label>
+                    -->
+                    
+                    <button id="row"  class="direction" onclick="changeDirection(1)">Row</button>
+                    <button id="column" class="direction" onclick="changeDirection(2)">Column</button>
+                    <button id="column" class="direction" onclick="changeDirection(3)">Row Reverse</button>
+                    <button id="column" class="direction" onclick="changeDirection(4)">Column Reverse</button>
+                </div>
+                <div>
+                    <span>Justify Content:</span>
+                    <button id="flex-start" class="hPosition" onclick="changePosition(1)">Flex Start</button>
+                    <button id="center" class="hPosition" onclick="changePosition(2)">Center</button>
+                    <button id="flex-end" class="hPosition" onclick="changePosition(3)">Flex End</button>
+                    <button id="flex-end" class="hPosition" onclick="changePosition(4)">Space Around</button>
+                    <button id="flex-end" class="hPosition" onclick="changePosition(5)">Space Between</button>
+                    <button id="flex-end" class="hPosition" onclick="changePosition(6)">Space Evenly</button>
+                </div>
+                <div>
+                    <span>Align Items:</span>
+                    <button id="flex-start" class="vPosition" onclick="chnageVerticalPosition(1)">Flex Start</button>
+                    <button id="center" class="vPosition" onclick="chnageVerticalPosition(2)">Center</button>
+                    <button id="flex-end" class="vPosition" onclick="chnageVerticalPosition(3)">Flex End</button>
+                </div>
+            </div>
+        </div>
+        <script>
+            /*function changeToRow(){
+                let rowEl=document.querySelector("#container");
+                rowEl.style.flexDirection="row";
+                let rowButton=document.querySelector("#row");
+                rowButton.style.backgroundColor="red";
+                let colButton=document.querySelector("#column");
+                colButton.style.backgroundColor="white";
+            }
+            function changeToColumn(){
+                let colEl=document.querySelector("#container");
+                colEl.style.flexDirection="column";
+                let rowButton=document.querySelector("#row");
+                rowButton.style.backgroundColor="white";
+                let colButton=document.querySelector("#column");
+                colButton.style.backgroundColor="red";
+
+            }*/
+            const activeColor="green";
+            const passiveColor="white";
+            function changeDirection(direction){
+                console.log("i am change direction")
+                let containerEl=document.querySelector("#container");
+                let buttonEls=document.getElementsByClassName("direction");
+                console.log(buttonEls);
+                for(let i=0;i<buttonEls.length;++i){
+                    buttonEls[i].style.backgroundColor = passiveColor;
+                }
+                console.log(containerEl);
+                switch(direction){
+                    case 1:containerEl.style.flexDirection="row";
+                    buttonEls[0].style.backgroundColor = activeColor;
+                        break;
+                    case 2:containerEl.style.flexDirection="column";
+                    buttonEls[1].style.backgroundColor = activeColor;
+                        break;
+                    case 3:containerEl.style.flexDirection="row-reverse";
+                    buttonEls[2].style.backgroundColor = activeColor;
+                    break;
+                    case 4:containerEl.style.flexDirection="column-reverse";
+                    buttonEls[3].style.backgroundColor = activeColor;    
+                    break;
+                    default:
+                }
+            }
+            function changePosition(position){
+                console.log(position);
+                let containerEl=document.querySelector("#container");
+                console.log(containerEl);
+                let buttonEls=document.getElementsByClassName("hPosition");
+                console.log(buttonEls);
+                for(let i=0;i<buttonEls.length;++i){
+                    buttonEls[i].style.backgroundColor = passiveColor;
+                }
+                switch(position){
+                    case 1:
+                        containerEl.style.justifyContent="flex-start";
+                        buttonEls[0].style.backgroundColor = activeColor;
+                        break;
+                    case 2:
+                        containerEl.style.justifyContent="center";
+                        buttonEls[1].style.backgroundColor = activeColor;
+                        break;
+                    case 3:
+                        containerEl.style.justifyContent="flex-end";
+                        buttonEls[2].style.backgroundColor = activeColor;
+                        break;
+                    case 4:containerEl.style.justifyContent="space-around";
+                    buttonEls[3].style.backgroundColor = activeColor;
+                        break;
+                    case 5:containerEl.style.justifyContent="space-between";
+                    buttonEls[4].style.backgroundColor = activeColor;
+                        break;
+                    case 6:containerEl.style.justifyContent="space-evenly";
+                    buttonEls[5].style.backgroundColor = activeColor;
+                        break;
+                    default:
+                }
+            }
+
+            function chnageVerticalPosition(position){
+                let containerEl=document.querySelector("#container");
+                console.log(containerEl);
+                let buttonEls=document.getElementsByClassName("vPosition");
+                console.log(buttonEls);
+                for(let i=0;i<buttonEls.length;++i){
+                    buttonEls[i].style.backgroundColor = passiveColor;
+                }
+                switch(position){
+                    case 1:
+                        containerEl.style.alignItems="flex-start";
+                        buttonEls[0].style.backgroundColor = activeColor;
+                        break;
+                    case 2:
+                        containerEl.style.alignItems="center";
+                        buttonEls[1].style.backgroundColor = activeColor;
+                        break;
+                    case 3:
+                        containerEl.style.alignItems="flex-end";
+                        buttonEls[2].style.backgroundColor = activeColor;
+                        break;
+                }
+            }
+            
+        </script>
+    </body>
+</html>
