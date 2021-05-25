@@ -1,100 +1,314 @@
 <!Doctype html>
-
 <html>
-	<head>
-		<title>This is my web page.</title>
-<style>
-	#heading{
-		display:flex;
-		flex-direction:row;
-		background-color:blue;
-		color:white;
-		padding:10px;
-		border:3px solid cyan;
-		text-align:center;
-		
-	}
-	body
-	{
-		background-color:orange;
-		margin:0px;
-		padding:0px;
-	}
-	#myLinks{
-		display:flex;
-		padding:10px;
-		background-color:green;
-		flex:1;
-	}
-	#container{
-		width:80%;
-		margin:auto;
-		
-		display:flex;
-		border:1px solid;
-		flex:1;
-		flex-direction:column;
-	}
-	#innerContainer{
-		display:flex;
-		flex:1;
-		flex-direction:row;
+    <head>
+        <style>
+            body{
+                padding: 0px;
+                margin:0px;
+            }
+            #wrapper{
+                display:flex;
+                flex-direction: column;
+                width:100%;
+                background-color:#E3F2FD;
+            }
+            #header{
+                display:flex;
+                flex:1;
+                flex-direction: row;
+                justify-content: space-between;
+                background-color: #0D47A1;
+                padding: 25px;
+                color:aliceblue;
+                font-weight:bold;
+                font-size:25px;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                position:fixed;
+                top:0;
+                width:100%;
+            }
+            #footer{
+                background-color: #0D47A1;
+                display:flex;
+                justify-content: space-around;
+                color:aliceblue;
+            }
+            #title{
+                display:flex;
+                flex:2;
+                flex-direction: row;
+                
+            }
+            #links{
+                display:flex;
+                flex:1;
+                flex-direction: row;
+                justify-content: space-evenly;
+                /*
+                color:aliceblue;
+                */
+            }
+            #main-content{
+                display:block;
+                flex-direction: column;
+                flex:1;
+                width:80%;
+                margin:auto;
+                
+                /*
+                background-color: rgb(121, 160, 206);
+                */
+            }
 
-	}
-	#magic{
-		
-		flex:1;
-		flex-direction:row;
-		background-color:yellow;
-		padding:10px;
-	}
-	#title{
-		text-align:center;
-		margin:auto;
-	}
-</style>
-	</head>
-	<body>
-	<div id="container">
-		<div id="heading">
-			<div id=title>
-			<h1>Welcome to Vrushali's web page!</h1>
-			</div>
-		</div>
-		<div id="innerContainer">
-		<div id="magic">
-			<p id="message">Click on the button and see magic!</p>
-			<label>Enter your name:</label>
-			<input id="name" type=text name="name" value="">
-			<h2 id="change"></h2>
-			<div id="content">
-				<button id="btnMagic">Click Me! </button>
-			</div>
-		</div>
-		<div id="myLinks">
-			<h4>Some links...</h4>
-			<ul>
-				<li><a href="expression.html">Bisection method</a></li>
-				<li><a href="tutorial.html">Python keyword break</a></li>
-				<li><a href="anything.html">Quotes</a></li>
-				<li><a href="flexbox.html">Play with flexbox</a></li>
-			</ul>
-		</div>
-		</div>
-	</div>
-	<script>
-		var btnEl=document.getElementById("btnMagic");
-		console.log(btnEl);
-		var onClickButton = function()
-		{
-			var nameEl=document.getElementById("name");
-			var headEl=document.getElementById("change");
-			console.log(headEl);
-			headEl.innerHTML="Hello!<br>Nice to meet you.<br>:)<br>"+nameEl.value;
-			btnEl.innerHTML="I am happy you Clicked me!";
-		};
-		btnEl.addEventListener("click",onClickButton);
-	</script>
-	</body>
+            h1{
+                font-family:monospace;
+                font-size:45px;
+                
+            }
 
-</html>  
+            p{
+                font-family:sans-serif;
+                font-size: 20px;
+            }
+            
+            #header  a {
+                outline: none;
+                text-decoration: none;
+                padding: 2px 1px 0;
+                color:white;
+            }
+
+            #header  a:link {
+            color: #f1f5ee;
+            }
+
+            #header  a:hover {
+                border-bottom: 1px solid;
+                /*background: #CDFEAA;*/
+                color:rgb(125, 209, 224);
+            }
+            
+            #AboutMeContents,#ContactContents{
+            
+                padding: 5px;
+            }
+            #ContactContents div{
+                display:flex;
+                flex-direction: row;
+                justify-content: space-between;
+                padding:5px;
+            }
+            #ProjectContents{
+                display:flex;
+                flex-direction: column;
+                flex:1;
+                padding: 5px;
+             
+                margin-top: 100px;
+            }
+            
+            #main-content  a {
+                outline: none;
+            /*    text-decoration: none;*/
+                padding: 2px 1px 0;
+                color:#110f0f;
+                font-size: 25px;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            }
+            #email{
+                color:#110f0f;
+                font-size: 25px;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+            }
+            /*
+            #ContactContents div{
+                background-color: #0D47A1;
+                color:aliceblue;
+                padding:25px;
+                
+            }
+            */
+            #hello{
+                font-size: 45px;
+            }
+        </style>
+    </head>
+    <body>
+    <div id="wrapper">
+        <div id="header">
+            
+                <div id="title">
+                    <span>Vrushali's Portfolio</span>
+                </div>
+                <div id="links">
+                    <div id="Projects">
+                        <span><a  href="#ProjectContents">Projects</a></span>
+                    </div>
+                    <div id="AboutMe">
+                        <span><a href="#AboutMeContents">About me</a></span>
+                        
+                    </div>
+                    <div id="Contacts">
+                        <span><a href="#ContactContents">Contact</a></span>
+                    </div>
+                    
+
+                </div>
+    
+        </div>
+        <div id="main-content">
+            
+            
+            <div id="ProjectContents">
+                <h1>Projects</h1>
+            </div>
+            <div id="AboutMeContents">
+                <h1>About Me</h1>
+                <p><span id="hello">Hello,🙋‍♀️</span></br> My name is Vrushali.</br>
+                    I am Student and developer.
+                </p>
+            </div>
+            <div id="ContactContents">
+                
+                <h1>Contact</h1>
+                <div>
+                    
+                     
+                    <div id="linkedin">
+                        <a  href="https://www.linkedin.com/in/vrushali-divekar-878b40197">Linkedin </a>
+                    </div>
+                    <div>
+                        <span id="email">vrushali.divekar98@gmail.com</span>
+                    </div>
+                </div>
+                
+                
+            </div>
+            
+        </div>
+        <div id="footer">
+            <p>&#169 2021 Vrushali</p>
+        </div>
+    </div>
+
+    <script>
+        /*
+            Need to create new element Project.Which will contain Project
+            title,image aasociated with that project,link to that project
+        
+        
+        */
+        
+        /*or*/
+        let Project=[
+            {
+                title:"Rotate Square",
+                image:"img1.png",
+                info:"Rotate the Square object using controller.I learned how to use rotation matrix to rotate objects",
+                link:"RotateSquare.html",
+            },
+            {
+                title:"Flexbox Playground",
+                image:"img2.png",
+                info:"Play with flexbox styles!",
+                link:"https://vrushali-d.github.io/flexbox.html",
+            },
+            {
+                title:"Portfolio",
+                image:"img3.png",
+                info:"The same Website You are seeing!",
+                link:"#",
+            },
+            {
+                title:"Quotes Book",
+                image:"img3.png",
+                info:"",
+                link:"#",
+            }
+        ];
+
+
+        let ClickLinkFunctions = [];
+        let linkEl=document.querySelector("#links");
+        console.log(linkEl);
+        let linkElList=linkEl.children;
+
+        function selectProject(active){
+            return ()=>{
+                for(let i=0;i<linkElList.length;++i){
+                    
+                    if(String("#"+linkElList[i].id) == ("#"+String(active))){
+                        let activeEl = document.querySelector("#"+active);
+                    
+                        activeEl.firstElementChild.firstElementChild.style.borderBottom = "1px";
+                        activeEl.firstElementChild.firstElementChild.style.borderBottomColor = "rgb(125, 209, 224)";
+                        activeEl.firstElementChild.firstElementChild.style.borderBottomStyle = "solid";
+                        activeEl.firstElementChild.firstElementChild.style.color = "rgb(125, 209, 224)";
+                        
+                    }
+                    else{
+                        linkElList[i].firstElementChild.firstElementChild.style.textDecoration="none";
+                        linkElList[i].firstElementChild.firstElementChild.style.color="white";
+                        linkElList[i].firstElementChild.firstElementChild.style.borderBottom="0px";
+                    }
+                }
+            }
+        }
+
+
+        for(i=0;i<linkElList.length;++i){
+            ClickLinkFunctions.push(selectProject(String(linkElList[i].id)));
+            linkElList[i].firstElementChild.firstElementChild.addEventListener("click",ClickLinkFunctions[i]);
+            
+        }
+
+
+
+
+        let node = document.querySelector('#ProjectContents');
+        //console.log(node);
+        for(let i=0;i<Project.length;i+=1){
+            let cardEl=document.createElement("div");
+            let infoEl=document.createElement("p");
+            infoEl.innerText = Project[i].info;
+            let titleEl=document.createElement("h3");
+            titleEl.innerHTML=Project[i].title;
+            //let clickEl=document.createElement("a");document.createElement("div");
+            //clickEl.href="#";
+            let textSecEl=document.createElement("div");
+            textSecEl.style.display="flex";
+            textSecEl.style.flexDirection="column";
+
+            let linkEl = document.createElement("a");
+            linkEl.href=Project[i].link;
+
+            cardEl.style.border="1px";
+            cardEl.style.borderStyle="solid";
+            cardEl.style.borderColor="black";
+            cardEl.style.borderRadius="10px";
+            cardEl.style.width="70%";
+            cardEl.style.margin="20px";
+            cardEl.style.padding="2px";
+            cardEl.style.backgroundColor="#90CAF9";
+            cardEl.style.display="flex";
+            cardEl.style.flexDirection="row";
+            let imgEl=document.createElement("img");
+            imgEl.src=Project[i].image;
+            imgEl.width="200";
+            imgEl.style.marginRight="10px";
+            
+            //clickEl.appendChild(cardEl)
+            cardEl.appendChild(imgEl);
+            linkEl.appendChild(titleEl)
+            textSecEl.appendChild(linkEl);
+            textSecEl.appendChild(infoEl);
+            cardEl.appendChild(textSecEl);
+            node.appendChild(cardEl);
+        }
+        
+
+    </script>
+
+    </body>
+</html>
