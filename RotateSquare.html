@@ -5,6 +5,8 @@
    <style>
 	body{
 		background-color:#131212;
+		color: aliceblue;
+		font-family: monospace;
 	}
 	#Container{
 		/*
@@ -15,11 +17,7 @@
 		flex-direction: row;
 		justify-content: space-evenly;
 	}
-	#Container div{
-		/*
-		border:1px solid white;
-		*/
-	}
+	
 	#Header{
 		
 		padding:20px;
@@ -32,8 +30,25 @@
 		color:aliceblue;
 		font-size: 20px;
 	}	
-	p{
+	
+	button{
+		background-color: rgb(20, 83, 20);
 		color:aliceblue;
+		border: 1px solid rgb(23, 51, 94);
+		font-weight: bold;
+		padding-left:25px;
+		padding-right:25px;
+		padding-top:10px;
+		padding-bottom:10px;
+	}
+	button:hover{
+		background-color: rgb(44, 124, 44);
+	}
+	#infoPara{
+
+		border-left:1px solid white;
+		padding-left:10px;
+		font-size: 14px;
 	}
 
   </style>
@@ -55,6 +70,9 @@
 			<!-- Show angle measure in degrees -->
 				
 		</div>
+		<div>
+			<button id="infoButton">More Information</button>
+		</div>
 	</div>
 	<!--
 	<div>
@@ -67,6 +85,45 @@
 	
 	</div>	
  </main>
+ <script>
+	let btnEl = document.querySelector("#infoButton");
+	btnEl.addEventListener("click",showInfo);
+	let state=0;
 
+	function showInfo(){
+		
+		if(state==0)
+			state=1;
+		else
+			state=0;
+
+		if(state==1){
+			console.log("Hello clicked button");
+			let parentEl = document.querySelector("#Container");
+			let divEl = document.createElement("div");
+			divEl.id="infoPara";
+			let headEl = document.createElement("h1");
+			headEl.innerHTML = "Information about Project";
+			let pEl = document.createElement("p");
+			pEl.innerHTML = "This program shows how rotation matrix transforms given square.</br>"
+			+"The angle of rotation gets calculated by using controller co-ordinates</br>"
+			+"Then using this angle in Rotation Matrix 4 points of square</br> that are vectors gets transformed."
+			+"</br></br>This program is made using HTML,CSS,JS,p5.js";
+			
+			divEl.appendChild(headEl);
+			divEl.appendChild(pEl);
+			parentEl.appendChild(divEl);
+			btnEl.innerHTML="Hide Information";
+		}
+		if(state==0){
+			
+			let divEl = document.querySelector("#infoPara");
+			divEl.remove();
+			btnEl.innerHTML="Show Information";
+		}
+
+	}
+
+ </script>
  </body>
 </html>

@@ -6,6 +6,10 @@ function setup() {
   c.parent(p);
   opEl = createP("Angle In Degrees:0");
   opEl.parent(select("#anglePrint"));
+
+  let buttonEl = select("#infoButton");
+    
+
 }
 
 

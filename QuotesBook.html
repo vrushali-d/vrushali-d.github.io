@@ -21,12 +21,28 @@
 		font-family:sans-serif;
 		color:aliceblue;
 	}	
-	#anglePrint{
-		font-family:monospace;
-		/* background-color: rgb(6, 10, 10); */
-		color:#0f0f0f;
-		font-size: 20px;
+	
+	button{
+		background-color: rgb(20, 83, 20);
+		color:aliceblue;
+		border: 1px solid rgb(23, 51, 94);
+		font-weight: bold;
+		padding-left:25px;
+		padding-right:25px;
+		padding-top:10px;
+		padding-bottom:10px;
+		margin-top:10px;
+	}
+	button:hover{
+		background-color: rgb(44, 124, 44);
 	}	
+	#infoPara{
+		border-left:1px solid white;
+		padding-left:10px;
+		color:aliceblue;
+		font-family: monospace;
+		font-size: 14px;
+	}
 
   </style>
   </head>
@@ -43,16 +59,52 @@
 	<div id="canvasPosition">
 	<!-- Add Canvas here using p5.js -->
 	</div>
-	<div id="anglePrint">
-		
-		<!-- Show angle measure in degrees -->
-	
-			
+	<div>
+		<button id="infoButton">More Information</button>
 	</div>
 	</div>
 	
 	</div>	
  </main>
+ <script>
+	 let btnEl = document.querySelector("#infoButton");
+	btnEl.addEventListener("click",showInfo);
+	let state=0;
 
+	function showInfo(){
+		
+		if(state==0)
+			state=1;
+		else
+			state=0;
+
+		if(state==1){
+			console.log("Hello clicked button");
+			let parentEl = document.querySelector("#Container");
+			let divEl = document.createElement("div");
+			divEl.id="infoPara";
+			let headEl = document.createElement("h1");
+			headEl.innerHTML = "Information about Project";
+			let pEl = document.createElement("p");
+			pEl.innerHTML = "I made this program when I was learning about</br>"+
+			"programming using processing js on Khan Academy."
+			+"</br></br>This program is made using HTML,CSS,JS,p5.js";
+			
+			divEl.appendChild(headEl);
+			divEl.appendChild(pEl);
+			parentEl.appendChild(divEl);
+			btnEl.innerHTML="Hide Information";
+		}
+		if(state==0){
+			
+			let divEl = document.querySelector("#infoPara");
+			divEl.remove();
+			btnEl.innerHTML="Show Information";
+		}
+
+	}
+
+
+ </script>
  </body>
 </html>
