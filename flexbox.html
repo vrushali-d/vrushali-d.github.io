@@ -79,25 +79,25 @@
                 <div>
                     <span>Flex Direction:</span>
                     
-                    <button id="row"  class="direction" onclick="changeDirection(1)">Row</button>
-                    <button id="column" class="direction" onclick="changeDirection(2)">Column</button>
-                    <button id="column" class="direction" onclick="changeDirection(3)">Row Reverse</button>
-                    <button id="column" class="direction" onclick="changeDirection(4)">Column Reverse</button>
+                    <button class="direction" onclick="changeDirection(1)">Row</button>
+                    <button class="direction" onclick="changeDirection(2)">Column</button>
+                    <button class="direction" onclick="changeDirection(3)">Row Reverse</button>
+                    <button class="direction" onclick="changeDirection(4)">Column Reverse</button>
                 </div>
                 <div>
                     <span>Justify Content:</span>
-                    <button id="flex-start" class="hPosition" onclick="changePosition(1)">Flex Start</button>
-                    <button id="center" class="hPosition" onclick="changePosition(2)">Center</button>
-                    <button id="flex-end" class="hPosition" onclick="changePosition(3)">Flex End</button>
-                    <button id="flex-end" class="hPosition" onclick="changePosition(4)">Space Around</button>
-                    <button id="flex-end" class="hPosition" onclick="changePosition(5)">Space Between</button>
-                    <button id="flex-end" class="hPosition" onclick="changePosition(6)">Space Evenly</button>
+                    <button class="hPosition" onclick="changePosition(1)">Flex Start</button>
+                    <button class="hPosition" onclick="changePosition(2)">Center</button>
+                    <button class="hPosition" onclick="changePosition(3)">Flex End</button>
+                    <button class="hPosition" onclick="changePosition(4)">Space Around</button>
+                    <button class="hPosition" onclick="changePosition(5)">Space Between</button>
+                    <button class="hPosition" onclick="changePosition(6)">Space Evenly</button>
                 </div>
                 <div>
                     <span>Align Items:</span>
-                    <button id="flex-start" class="vPosition" onclick="chnageVerticalPosition(1)">Flex Start</button>
-                    <button id="center" class="vPosition" onclick="chnageVerticalPosition(2)">Center</button>
-                    <button id="flex-end" class="vPosition" onclick="chnageVerticalPosition(3)">Flex End</button>
+                    <button class="vPosition" onclick="chnageVerticalPosition(1)">Flex Start</button>
+                    <button class="vPosition" onclick="chnageVerticalPosition(2)">Center</button>
+                    <button class="vPosition" onclick="chnageVerticalPosition(3)">Flex End</button>
                 </div>
             </div>
         </div>
@@ -106,7 +106,7 @@
             const passiveColor="white";
             function changeDirection(direction){
                 let containerEl=document.querySelector("#container");
-                let buttonEls=document.getElementsByClassName("direction");
+                let buttonEls=document.querySelector(".direction");
                 for(let i=0;i<buttonEls.length;++i){
                     buttonEls[i].style.backgroundColor = passiveColor;
                 }
@@ -116,7 +116,7 @@
             }
             function changePosition(position){
                 let containerEl=document.querySelector("#container");
-                let buttonEls=document.getElementsByClassName("hPosition");
+                let buttonEls=document.querySelector(".hPosition");
                 for(let i=0;i<buttonEls.length;++i){
                     buttonEls[i].style.backgroundColor = passiveColor;
                 }
@@ -127,7 +127,7 @@
 
             function chnageVerticalPosition(position){
                 let containerEl=document.querySelector("#container");
-                let buttonEls=document.getElementsByClassName("vPosition");
+                let buttonEls=document.querySelector(".vPosition");
                 for(let i=0;i<buttonEls.length;++i){
                     buttonEls[i].style.backgroundColor = passiveColor;
                 }
