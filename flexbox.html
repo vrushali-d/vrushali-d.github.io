@@ -12,16 +12,11 @@
                 width:80%;
                 display:flex;
                 flex-direction: column;
-                /*justify-content: center;*/
-                /*align-items: center;*/
-                /*background-color: rgb(35, 48, 56);*/
             }
             #container{
                 background-color: rgb(55, 154, 211);
                 height:400px;
-                
                 display:flex;
-                /*flex:1;*/
                 justify-content: flex-start;
                 flex-direction: row;
                 border:1px solid;
@@ -47,13 +42,11 @@
                
             }
             #title{
-                /*background-color: brown;*/
                 display: flex;
                 align-items: center;
                 justify-content: center;
             }
             #control{
-                /*background-color: azure;*/
                 font-size: 25px;
             }
             button{
@@ -109,46 +102,21 @@
             </div>
         </div>
         <script>
-            /*function changeToRow(){
-                let rowEl=document.querySelector("#container");
-                rowEl.style.flexDirection="row";
-                let rowButton=document.querySelector("#row");
-                rowButton.style.backgroundColor="red";
-                let colButton=document.querySelector("#column");
-                colButton.style.backgroundColor="white";
-            }
-            function changeToColumn(){
-                let colEl=document.querySelector("#container");
-                colEl.style.flexDirection="column";
-                let rowButton=document.querySelector("#row");
-                rowButton.style.backgroundColor="white";
-                let colButton=document.querySelector("#column");
-                colButton.style.backgroundColor="red";
-
-            }*/
             const activeColor="green";
             const passiveColor="white";
             function changeDirection(direction){
-                console.log("i am change direction")
                 let containerEl=document.querySelector("#container");
                 let buttonEls=document.getElementsByClassName("direction");
-                console.log(buttonEls);
                 for(let i=0;i<buttonEls.length;++i){
                     buttonEls[i].style.backgroundColor = passiveColor;
                 }
                 let options = ["row","column","row-reverse","column-reverse"];
                 containerEl.style.flexDirection = options[direction-1];
                 buttonEls[direction-1].style.backgroundColor = activeColor;
-
-                console.log(containerEl);
-                
             }
             function changePosition(position){
-                console.log(position);
                 let containerEl=document.querySelector("#container");
-                console.log(containerEl);
                 let buttonEls=document.getElementsByClassName("hPosition");
-                console.log(buttonEls);
                 for(let i=0;i<buttonEls.length;++i){
                     buttonEls[i].style.backgroundColor = passiveColor;
                 }
@@ -159,9 +127,7 @@
 
             function chnageVerticalPosition(position){
                 let containerEl=document.querySelector("#container");
-                console.log(containerEl);
                 let buttonEls=document.getElementsByClassName("vPosition");
-                console.log(buttonEls);
                 for(let i=0;i<buttonEls.length;++i){
                     buttonEls[i].style.backgroundColor = passiveColor;
                 }
