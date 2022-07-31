@@ -106,7 +106,7 @@
             const passiveColor="white";
             function changeDirection(direction){
                 let containerEl=document.querySelector("#container");
-                let buttonEls=document.querySelector(".direction");
+                let buttonEls=document.querySelectorAll(".direction");
                 for(let i=0;i<buttonEls.length;++i){
                     buttonEls[i].style.backgroundColor = passiveColor;
                 }
@@ -116,7 +116,7 @@
             }
             function changePosition(position){
                 let containerEl=document.querySelector("#container");
-                let buttonEls=document.querySelector(".hPosition");
+                let buttonEls=document.querySelectorAll(".hPosition");
                 for(let i=0;i<buttonEls.length;++i){
                     buttonEls[i].style.backgroundColor = passiveColor;
                 }
@@ -127,7 +127,7 @@
 
             function chnageVerticalPosition(position){
                 let containerEl=document.querySelector("#container");
-                let buttonEls=document.querySelector(".vPosition");
+                let buttonEls=document.querySelectorAll(".vPosition");
                 for(let i=0;i<buttonEls.length;++i){
                     buttonEls[i].style.backgroundColor = passiveColor;
                 }
