@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Demo</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+        
+    <style>
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .card-container{
+            width: 300px;
+            max-height: 500px;
+            /* background-color: antiquewhite; */
+            border: 1px solid black;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            /* align-items: center; */
+            overflow: auto;
+            
+        }
+        .card-container:hover{
+            box-shadow: 10px 5px 5px rgb(95, 93, 93);
+        }
+        .heading{
+            font-family: monospace;
+            background-color: #eeeeeef2;
+        }
+        .card-container img{
+            /* height: 100px; */
+            object-fit: cover;
+        }
+        .card-container p{
+            padding: 5px;
+        }
+        .project-content{
+            padding: 5px;
+        }
+        #think{
+            width: 200px;
+        }
+        button{
+            padding: 5px;
+            border: 1px solid black;
+            border-radius: 10%;
+            background-color: whitesmoke;
+            color: black;
+            
+        }
+        button:hover{
+            background-color: black;
+            color: whitesmoke;
+            font-weight: bold;
+        }
+        h1{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="card-container">
+        <div class="heading">
+            <h1>Random Problem Selector</h1>
+        </div>
+        <img id="think" src="./../images/html.svg" />
+        <p>This program using codeforces APIs to select a random problem to solve from codeforces website. We can also apply the filters to select the difficulty of problem and type of problem. 
+        </p>
+        <div class="project-content">
+            <button>Code</button>
+            <button>Demo</button>
+        </div>
+    </div>
+    
+</body>
+</html>

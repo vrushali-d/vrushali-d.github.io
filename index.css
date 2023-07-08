@@ -1,0 +1,124 @@
+body {
+    margin: 0px;
+    font-family: sans-serif;
+}
+
+.nav-bar {
+    position: sticky;
+    top: 0px;
+    height: 50px;
+    background-color: #2273f0;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 5px;
+}
+.nav-bar div{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+#about-me {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+#dev-img{
+    width: 25rem;
+}
+#info {
+    /* background-color: aquamarine; */
+    font-size: 2rem;
+    width: 60%;
+    padding: 5px;
+}
+
+#projects {
+    height: 100vh;
+    display: flex;
+    justify-content: space-around;
+}
+
+#contact {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.card-container {
+    width: 300px;
+    max-height: 450px;
+    /* background-color: antiquewhite; */
+    border: 1px solid black;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: auto;
+
+}
+
+.card-container:hover {
+    box-shadow: 10px 5px 5px rgb(95, 93, 93);
+}
+
+.heading {
+    font-family: monospace;
+    display: flex;
+    /* background-color: #eeeeeef2; */
+}
+
+.card-container img {
+    /* height: 100px; */
+    object-fit: cover;
+}
+
+.card-container p {
+    padding: 5px;
+}
+
+.project-content {
+    padding: 5px;
+}
+
+#think {
+    width: 200px;
+}
+
+.card-container a{
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 10%;
+    background-color: whitesmoke;
+    color: black;
+    font-size: 1rem;
+}
+.card-container a:hover {
+    background-color: black;
+    color: whitesmoke;
+    font-weight: bold;
+}
+h1 {
+    text-align: center;
+}
+.nav-bar a {
+    text-decoration: none;
+    font-size: 1.5rem;
+    color: white;
+}
+.nav-bar a:hover {
+    color: black;
+}
+.main-title{
+    font-size: 1rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+}
+#footer{
+    background-color: #2273f0;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,0 +1,58 @@
+<!Doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Flexbox CSS</title>  
+        <link rel="stylesheet" href="./styles.css" />    
+    </head>
+    <body>
+        
+        <div id="wraper">
+            
+            <div id="title">
+                <div>
+                    <h1>CSS Flexbox Layout😀</h1>
+                    <p>You can use following buttons to play with flexbox layout alignment and spacing!</p>
+                </div>
+            </div>
+            <div id="container">
+                <div id="box1" class="box">
+                    <h2>1</h2>
+                </div>
+                <div id="box2" class="box">
+                    <h2>2</h2>
+                </div>
+                <div id="box3" class="box">
+                    <h2>3</h2>
+                </div>
+            </div>
+            <div id="control">
+                <h2>Hey,Check out various controls here</h2>
+                <div>
+                    <span>Flex Direction:</span>
+                    
+                    <button class="direction" onclick="changeDirection(1)">Row</button>
+                    <button class="direction" onclick="changeDirection(2)">Column</button>
+                    <button class="direction" onclick="changeDirection(3)">Row Reverse</button>
+                    <button class="direction" onclick="changeDirection(4)">Column Reverse</button>
+                </div>
+                <div>
+                    <span>Justify Content:</span>
+                    <button class="hPosition" onclick="changePosition(1)">Flex Start</button>
+                    <button class="hPosition" onclick="changePosition(2)">Center</button>
+                    <button class="hPosition" onclick="changePosition(3)">Flex End</button>
+                    <button class="hPosition" onclick="changePosition(4)">Space Around</button>
+                    <button class="hPosition" onclick="changePosition(5)">Space Between</button>
+                    <button class="hPosition" onclick="changePosition(6)">Space Evenly</button>
+                </div>
+                <div>
+                    <span>Align Items:</span>
+                    <button class="vPosition" onclick="chnageVerticalPosition(1)">Flex Start</button>
+                    <button class="vPosition" onclick="chnageVerticalPosition(2)">Center</button>
+                    <button class="vPosition" onclick="chnageVerticalPosition(3)">Flex End</button>
+                </div>
+            </div>
+        </div>
+        <script src="./app.js"></script>
+    </body>
+</html>

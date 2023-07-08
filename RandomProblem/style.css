@@ -1,0 +1,94 @@
+body{
+    margin: 0px;
+    
+}
+#heading {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 50vh;
+}
+
+#Filter {
+
+    /*background-color: aqua;*/
+    display: flex;
+    flex: 1;
+    justify-content: flex-start;
+    flex-direction: column;
+    margin: 0.5rem;
+}
+
+#PointsSec {
+    /*background-color: aqua;*/
+    display: flex;
+
+}
+
+#OutLink {
+    /*background-color: rgb(48, 17, 115);*/
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0.5rem;
+    border: 1px solid;
+}
+
+#content {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+
+}
+
+#pLink {
+    display: flex;
+    flex: 2;
+    padding: 10px;
+}
+
+#btn {
+    display: flex;
+    flex: 2;
+
+}
+
+#tags {
+    display: grid;
+    margin: 10px;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.loader {
+    border: 16px solid #f3f3f3;
+    /* Light grey */
+    border-top: 16px solid #3498db;
+    /* Blue */
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    animation: spin 2s linear infinite;
+}
+.linkText{
+    height: 116px;
+}
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

@@ -1,0 +1,57 @@
+<!Doctype html>
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.2.0/lib/p5.js"></script> 
+	<link href="./style.css" rel="stylesheet"/>
+  </head>
+  <body>
+  <script src="RotateSquareSketch.js"></script>
+    <main>
+	<div id="Container">
+	<div>
+		<div id="Header">
+			<h1>Rotate The Square.</h1>
+		</div>		
+	
+		<div id="canvasPosition">
+		<!-- Add Canvas here using p5.js -->
+		</div>
+		<div id="anglePrint">
+			<!-- Show angle measure in degrees -->
+				
+		</div>
+		<div>
+			<button id="infoButton">More Information</button>
+		</div>
+	</div>
+	<div id="infoPara" class="hide-info">
+		<h1>Information about Project</h1>
+		<p>
+			This program shows how rotation matrix transforms given square.
+			The angle of rotation gets calculated by using controller co-ordinates
+			Then using this angle in Rotation Matrix 4 points of square that are vectors gets transformed.<br/>
+			This program is made using HTML,CSS,JS,p5.js
+		</p>
+	</div>
+	</div>	
+ </main>
+ <script>
+	let btnEl = document.querySelector("#infoButton");
+	btnEl.addEventListener("click",showInfo);
+	let infoEl = document.querySelector("#infoPara");
+	//let state=0;
+
+	function showInfo(){
+		if(infoEl.classList.contains('hide-info')){
+			infoEl.classList.remove('hide-info');
+			btnEl.innerHTML="Hide Information";
+		}
+		else{
+			infoEl.classList.add('hide-info');
+			btnEl.innerHTML="Show Information";
+		}
+		
+	}
+ </script>
+ </body>
+</html>

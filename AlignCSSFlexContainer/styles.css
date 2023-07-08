@@ -1,0 +1,49 @@
+body{
+    background-color: gainsboro;
+}
+#wraper {
+    margin:auto;
+    width:80%;
+    display:flex;
+    flex-direction: column;
+}
+#container{
+    background-color: rgb(55, 154, 211);
+    height:400px;
+    display:flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    border:1px solid;
+    font-family: monospace;
+}
+.box{
+    margin:1px;
+    display:flex;
+    width: 100px;
+    height: 100px;
+    justify-content: center;
+    align-items: center;
+    
+}
+#box1{
+    background-color:#d62828;
+}
+#box2{
+    background-color:#bfd200;
+}
+#box3{
+    background-color: #5a189a;
+   
+}
+#title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#control{
+    font-size: 25px;
+}
+button{
+    background-color: rgb(49, 175, 91);
+    padding: 5px;
+}

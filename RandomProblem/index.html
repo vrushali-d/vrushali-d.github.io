@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Random Problem From CodeForces</title>
+    <link rel="stylesheet" href="./style.css"/>
+</head>
+
+<body>
+    <div id="container">
+        <div id="heading">
+            <h2>This Program Will give random problem for solving on CodeForces</h2>
+        </div>
+        <div id="content">
+            <div id="Filter">
+                <h3>Points Filter</h3>
+                <div id="PointsSec">
+                    <select name="points" id="pointsLow" onchange="ChangeHighEnd()">
+                        <option value="800">800</option>
+                        <option value="900">900</option>
+                        <option value="1000">1000</option>
+                        <option value="1200">1200</option>
+                    </select>
+                    <p>
+                        <= Points <=</p>
+                            <select name="points" id="pointsHigh">
+                                <option value="800">800</option>
+                                <option value="900">900</option>
+                                <option value="1000">1000</option>
+                                <option value="1200">1200</option>
+                            </select>
+                </div>
+                <div id="tags">
+                </div>
+                <button id="conditions" onclick="filterProblems()">Apply Filters</button>
+
+            </div>
+            <div id="OutLink">
+                <div>
+                <div id="pLink">
+                    <div class="loader" id="loader"></div>
+                    <div class="linkText">
+                        <p id="notFound"></p>
+                        <a href="" id="linkProblem"></a>
+                    </div>
+                    
+                </div>
+                <div id="btn">
+                    <div>
+                        <button id="next" onclick="nextProblem()">Next Random Problem</button>
+                    </div>
+
+                </div>
+            </div>
+            </div>
+
+        </div>
+
+
+    </div>
+   <script src="./app.js"></script>
+</body>
+
+</html>
