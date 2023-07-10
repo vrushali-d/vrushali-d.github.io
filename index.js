@@ -1,3 +1,6 @@
+//set year in footer 
+const footerDate = document.querySelector("#date");
+footerDate.innerHTML = new Date().getFullYear();
 
 let projectContainer = document.querySelector('#projects');
 
