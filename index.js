@@ -1,6 +1,14 @@
 //set year in footer 
 const footerDate = document.querySelector("#date");
 footerDate.innerHTML = new Date().getFullYear();
+//set toggle button
+let toggleBtn = document.querySelector('.toggle-btn');
+let linksDiv =  document.querySelector('.links');
+
+toggleBtn.addEventListener('click',()=>{
+    linksDiv.classList.toggle('show-links');
+
+});
 
 let projectContainer = document.querySelector('#projects');
 
