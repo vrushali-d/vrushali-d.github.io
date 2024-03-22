@@ -78,7 +78,6 @@ function makeQueryParameter(t, query) {
         }
         query += parts[parts.length - 1] + ';';
     }
-    //console.log(query);
     return query;
 }
 function nextProblem() {
@@ -134,12 +133,11 @@ async function filterProblems() {
     let opEL = document.querySelector("#notFound");
     linkEl.innerHTML = "";
     opEL.innerHTML = "";
-    //console.log("In filter problems. Number after filter:" + filteredProblems.length);
+
     let selectedTags = [];
     let leftPaneEls = document.querySelector("#tags");
     leftPaneEls.childNodes.forEach((i) => {
         i.childNodes.forEach((item) => {
-            //console.log(item.tagName);
             if ((item.tagName == "INPUT") && (item.checked == true)) {
                 selectedTags.push(item.value);
             }
@@ -151,7 +149,7 @@ async function filterProblems() {
     selectedTags.forEach((t) => {
         query = makeQueryParameter(t, query);
     });
-    //query=query.substring(0,query.length-2);
+
     url = baseURL + query;
     console.log(url);
     await loadProblem(baseURL + query);
@@ -159,7 +157,7 @@ async function filterProblems() {
     console.log("In filter problems");
     let lowBound = document.querySelector("#pointsLow");
     let upBound = document.querySelector("#pointsHigh");
-    //console.log("Low:" + lowBound.value + " Up:" + upBound.value);
+
     filteredProblems = problems.filter((x) => {
         if (x.rating >= lowBound.value && x.rating <= upBound.value) {
             return true;
