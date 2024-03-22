@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./style.css" rel="stylesheet"/>
+    <title>Blog</title>
+</head>
+<body>
+    <div id="container">
+        <h1>Articles</h1>
+        <div id="heading">
+            <p>I am writing articles in this blog to improve my writing skills.I will write about new things I learn or same things I learn effective ways and some random topics which I find useful. </p>
+            <img width="400px" src="./images/mika-baumeister-LaqL8nxiacc-unsplash.jpg" />    
+        </div>
+        <div id="posts-container">
+            
+        </div>
+        
+    </div>
+    <script src="./blogs.js"></script>
+    <script>
+
+       function createPost(post){
+        let container = document.createElement('div');
+        container.className="blog-card";
+        let btnEl = document.createElement('button');
+        btnEl.innerText = "Read More";
+        btnEl.addEventListener('click',()=>{
+            if(container.classList.contains("blog-card-expanded")){
+                container.classList.remove("blog-card-expanded");
+                btnEl.innerText = 'Read More';
+            }
+            else{
+                container.classList.add("blog-card-expanded");
+                btnEl.innerText = 'Hide';
+            }
+        });
+        container.appendChild(btnEl);
+        let headingEl = document.createElement('h1');
+        headingEl.innerText = post.title;
+        let contentEl = document.createElement('p');
+        contentEl.innerText = post.content;
+        container.appendChild(headingEl);
+        container.appendChild(contentEl);
+        return container;
+       } 
+       for(let i=0;i<posts.length;++i){
+        let postContainer = document.getElementById('posts-container');
+        postContainer.appendChild(createPost(posts[i]));
+       }
+
+
+    </script>
+</body>
+</html>
