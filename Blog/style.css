@@ -21,6 +21,8 @@
     overflow: hidden;
     margin-bottom: 20px;
     border-radius: 1%;
+    font-size: 1.2rem;
+    font-family: cursive;
 }
 
 .blog-card-expanded{
@@ -46,4 +48,26 @@ img{
 
 h1{
   font-family: sans-serif;
+}
+button{
+  padding: 5px;
+}
+@media screen and (max-width:650px) {
+  .blog-card{
+    font-size: 1.5rem;
+    overflow: hidden;
+  }
+  #container{
+    width: 100vw;
+    padding-top: 1rem;
+    /* background-color: aqua; */
+    min-height: 100vh;
+  }
+  #heading{
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    padding: 5px;
+  }
+  
 }
