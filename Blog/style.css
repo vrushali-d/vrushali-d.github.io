@@ -1,12 +1,3 @@
-*,
-::after,
-::before {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  background-color: rgb(217, 220, 220);
-}
-
 body{
   background-image: repeating-linear-gradient(0deg, #e0e9ee, #addaf1 2px, white 2px, white 1.5rem);
 }
