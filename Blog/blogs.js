@@ -20,7 +20,7 @@ P.S.: This principle applies not just to English but to proficiency in other lan
     • The Power of Testing: Writing test cases for your code is essential. This ensures your code functions as expected and helps catch errors early in the development process.
     
     • Designing Functions and Classes: Be able to design classes and functions effectively. This includes defining clear input and output parameters, identifying potential errors the function might throw, and considering how the "consumer" (the code using your function) will handle them. Always anticipate how the consumer will interact with your function/class.`
-}
+},
 {
     id:3,
     title:"My Learning Experience with the JavaScript30 Course",
