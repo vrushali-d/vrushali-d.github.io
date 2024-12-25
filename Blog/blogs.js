@@ -21,5 +21,20 @@ P.S.: This principle applies not just to English but to proficiency in other lan
     
     • Designing Functions and Classes: Be able to design classes and functions effectively. This includes defining clear input and output parameters, identifying potential errors the function might throw, and considering how the "consumer" (the code using your function) will handle them. Always anticipate how the consumer will interact with your function/class.`
 }
+{
+    id:3,
+    title:"My Learning Experience with the JavaScript30 Course",
+    content:`When I first decided to take the JavaScript30 course, I thought it might be too challenging. However, as I progressed through the lessons, I realized that understanding and applying the logic was easier than I anticipated.
+
+One thing that stood out to me was how the projects were not arranged in a steadily increasing difficulty level—they had a randomness to their challenges, much like life itself.
+
+For most projects, I followed this approach:
+
+• Downloaded the starter files and prepared to dive in.
+• Watched a few minutes of the instructional video to grasp the idea of how the final version should look.
+• Implemented the project my way, using the concepts I had learned.
+• Compared my solution with Wes Bos's approach. Sometimes they matched, and other times they didn't—but I learned something new either way.
+`
+}               
 ];
 
