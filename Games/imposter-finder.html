@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Imposter Finder</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --saffron: #FF6B00;
+    --saffron-light: #FF8C00;
+    --green: #138808;
+    --green-light: #1aad0a;
+    --cream: #FFF8EE;
+    --dark: #1A0A00;
+    --gold: #FFB830;
+    --red: #D62828;
+    --card-bg: #FFFDF7;
+    --shadow: 0 8px 32px rgba(255,107,0,0.15);
+    --radius: 20px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Baloo 2', 'Noto Sans Devanagari', sans-serif;
+    background: var(--cream);
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: var(--dark);
+  }
+
+  /* Background pattern */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(255,107,0,0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(19,136,8,0.08) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(255,184,48,0.05) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .screen {
+    display: none;
+    min-height: 100vh;
+    position: relative;
+    z-index: 1;
+    padding: 20px 16px 40px;
+    max-width: 480px;
+    margin: 0 auto;
+    animation: fadeIn 0.4s ease;
+  }
+  .screen.active { display: flex; flex-direction: column; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Header */
+  .game-header {
+    text-align: center;
+    padding: 24px 0 16px;
+  }
+  .game-logo {
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: var(--saffron);
+    line-height: 1;
+    letter-spacing: -1px;
+    text-shadow: 3px 3px 0 rgba(255,107,0,0.15);
+  }
+  .game-logo span { color: var(--green); }
+  .game-tagline {
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 4px;
+    font-weight: 400;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+    border: 1.5px solid rgba(255,107,0,0.12);
+    margin-bottom: 16px;
+  }
+  .card-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--saffron);
+    margin-bottom: 14px;
+  }
+
+  /* Language Toggle */
+  .lang-toggle-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 14px 20px;
+    box-shadow: var(--shadow);
+    border: 1.5px solid rgba(255,107,0,0.12);
+    margin-bottom: 16px;
+  }
+  .lang-label { font-weight: 700; font-size: 0.95rem; color: var(--dark); }
+  .lang-sublabel { font-size: 0.75rem; color: #999; }
+  .toggle-track {
+    width: 64px; height: 32px;
+    background: #e0e0e0;
+    border-radius: 16px;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.3s;
+    flex-shrink: 0;
+  }
+  .toggle-track.on { background: var(--saffron); }
+  .toggle-thumb {
+    position: absolute;
+    top: 4px; left: 4px;
+    width: 24px; height: 24px;
+    background: white;
+    border-radius: 50%;
+    transition: left 0.3s;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.6rem; font-weight: 800;
+  }
+  .toggle-track.on .toggle-thumb { left: 36px; }
+  .toggle-labels { display: flex; gap: 8px; align-items: center; font-size: 0.85rem; }
+  .toggle-opt { color: #bbb; font-weight: 600; transition: color 0.3s; }
+  .toggle-opt.active { color: var(--saffron); }
+
+  /* Number controls */
+  .num-control {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .num-control:last-child { margin-bottom: 0; }
+  .num-label { font-weight: 600; font-size: 0.95rem; }
+  .num-label small { display: block; font-size: 0.72rem; color: #999; font-weight: 400; }
+  .num-stepper { display: flex; align-items: center; gap: 0; }
+  .num-btn {
+    width: 38px; height: 38px;
+    border: none;
+    background: var(--saffron);
+    color: white;
+    font-size: 1.3rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s, transform 0.1s;
+    line-height: 1;
+  }
+  .num-btn:first-child { border-radius: 10px 0 0 10px; }
+  .num-btn:last-child { border-radius: 0 10px 10px 0; }
+  .num-btn:active { transform: scale(0.92); background: var(--saffron-light); }
+  .num-val {
+    min-width: 44px; height: 38px;
+    background: white;
+    border: 2px solid rgba(255,107,0,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 1.1rem; color: var(--dark);
+  }
+
+  /* Category Grid */
+  .cat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .cat-item {
+    border: 2px solid rgba(255,107,0,0.15);
+    border-radius: 14px;
+    padding: 12px 10px;
+    cursor: pointer;
+    text-align: center;
+    background: white;
+    transition: all 0.2s;
+    user-select: none;
+  }
+  .cat-item.selected {
+    border-color: var(--saffron);
+    background: rgba(255,107,0,0.06);
+    box-shadow: 0 0 0 1px var(--saffron);
+  }
+  .cat-emoji { font-size: 1.5rem; display: block; margin-bottom: 4px; }
+  .cat-name { font-size: 0.78rem; font-weight: 700; color: var(--dark); line-height: 1.2; }
+  .cat-check {
+    width: 18px; height: 18px;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    margin: 6px auto 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.65rem;
+    color: transparent;
+    background: transparent;
+    transition: all 0.2s;
+  }
+  .cat-item.selected .cat-check {
+    border-color: var(--saffron);
+    background: var(--saffron);
+    color: white;
+  }
+
+  /* Buttons */
+  .btn {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 14px;
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.3px;
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--saffron), var(--saffron-light));
+    color: white;
+    box-shadow: 0 6px 20px rgba(255,107,0,0.35);
+  }
+  .btn-primary:hover { box-shadow: 0 8px 24px rgba(255,107,0,0.45); }
+  .btn-secondary {
+    background: white;
+    color: var(--saffron);
+    border: 2px solid var(--saffron);
+  }
+  .btn-green {
+    background: linear-gradient(135deg, var(--green), var(--green-light));
+    color: white;
+    box-shadow: 0 6px 20px rgba(19,136,8,0.3);
+  }
+  .btn-red {
+    background: linear-gradient(135deg, var(--red), #e63030);
+    color: white;
+    box-shadow: 0 6px 20px rgba(214,40,40,0.3);
+  }
+  .btn-gold {
+    background: linear-gradient(135deg, #e6a200, var(--gold));
+    color: white;
+    box-shadow: 0 6px 20px rgba(255,184,48,0.35);
+  }
+  .btn + .btn { margin-top: 12px; }
+
+  /* Pass screen */
+  .pass-screen-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 24px;
+  }
+  .player-badge {
+    width: 80px; height: 80px;
+    background: linear-gradient(135deg, var(--saffron), var(--gold));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem;
+    box-shadow: 0 8px 24px rgba(255,107,0,0.3);
+  }
+  .pass-title { font-size: 1.6rem; font-weight: 800; color: var(--dark); }
+  .pass-sub { font-size: 0.9rem; color: #888; }
+  .pass-instruction {
+    background: white;
+    border-radius: 16px;
+    padding: 16px 20px;
+    border: 1.5px solid rgba(255,107,0,0.15);
+    font-size: 0.88rem;
+    color: #666;
+    line-height: 1.5;
+    width: 100%;
+  }
+
+  /* Word reveal */
+  .word-reveal-box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 20px;
+  }
+  .word-card {
+    width: 100%;
+    background: white;
+    border-radius: 24px;
+    padding: 40px 24px;
+    box-shadow: 0 12px 40px rgba(255,107,0,0.15);
+    border: 2px solid rgba(255,107,0,0.15);
+  }
+  .word-card.imposter-card {
+    background: linear-gradient(135deg, #1A0A00, #3D1000);
+    border-color: var(--red);
+    box-shadow: 0 12px 40px rgba(214,40,40,0.3);
+  }
+  .word-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #bbb; margin-bottom: 12px; }
+  .word-text { font-size: 2.8rem; font-weight: 800; color: var(--dark); line-height: 1.1; }
+  .imposter-card .word-label { color: rgba(255,107,0,0.6); }
+  .imposter-card .word-text { color: var(--red); font-size: 2.2rem; }
+  .imposter-hint { font-size: 0.82rem; color: rgba(255,255,255,0.5); margin-top: 10px; }
+  .category-tag {
+    display: inline-block;
+    background: rgba(255,107,0,0.1);
+    color: var(--saffron);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  /* Discussion screen */
+  .discuss-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    text-align: center;
+  }
+  .discuss-icon { font-size: 4rem; }
+  .discuss-title { font-size: 1.7rem; font-weight: 800; color: var(--dark); }
+  .discuss-rules {
+    background: white;
+    border-radius: 18px;
+    padding: 20px;
+    text-align: left;
+    width: 100%;
+    border: 1.5px solid rgba(255,107,0,0.12);
+  }
+  .rule-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    font-size: 0.88rem;
+    color: #555;
+    line-height: 1.4;
+  }
+  .rule-item:last-child { margin-bottom: 0; }
+  .rule-num {
+    min-width: 24px; height: 24px;
+    background: var(--saffron);
+    color: white;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.72rem;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+
+  /* Reveal screen */
+  .reveal-content { flex: 1; display: flex; flex-direction: column; gap: 16px; }
+  .reveal-word-box {
+    background: linear-gradient(135deg, var(--saffron), var(--gold));
+    border-radius: 20px;
+    padding: 28px;
+    text-align: center;
+    color: white;
+  }
+  .reveal-word-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; opacity: 0.8; margin-bottom: 6px; }
+  .reveal-word { font-size: 2.4rem; font-weight: 800; }
+  .reveal-word-en { font-size: 1.1rem; opacity: 0.8; margin-top: 4px; }
+  .imposters-box {
+    background: linear-gradient(135deg, #1A0A00, #3D1000);
+    border-radius: 20px;
+    padding: 20px;
+    border: 2px solid var(--red);
+  }
+  .imposters-title { color: var(--red); font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+  .imposter-list { display: flex; flex-wrap: wrap; gap: 8px; }
+  .imposter-badge {
+    background: rgba(214,40,40,0.2);
+    border: 1.5px solid var(--red);
+    color: white;
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 0.88rem;
+    font-weight: 700;
+  }
+  .safe-players-box { background: white; border-radius: 20px; padding: 20px; border: 1.5px solid rgba(19,136,8,0.2); }
+  .safe-title { color: var(--green); font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+  .safe-list { display: flex; flex-wrap: wrap; gap: 8px; }
+  .safe-badge {
+    background: rgba(19,136,8,0.08);
+    border: 1.5px solid rgba(19,136,8,0.3);
+    color: var(--green);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 0.88rem;
+    font-weight: 700;
+  }
+
+  .divider { height: 1px; background: rgba(255,107,0,0.1); margin: 4px 0; }
+  .spacer { flex: 1; }
+  .error-msg { color: var(--red); font-size: 0.82rem; text-align: center; font-weight: 600; display: none; }
+  .select-all-row { display: flex; justify-content: flex-end; margin-bottom: 10px; }
+  .select-all-btn { background: none; border: none; color: var(--saffron); font-family: 'Baloo 2', sans-serif; font-size: 0.8rem; font-weight: 700; cursor: pointer; text-decoration: underline; }
+  .progress-dots { display: flex; gap: 6px; justify-content: center; margin-bottom: 8px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #ddd; transition: background 0.3s; }
+  .dot.done { background: var(--green); }
+  .dot.current { background: var(--saffron); }
+</style>
+</head>
+<body>
+
+<!-- SCREEN 1: HOME -->
+<div class="screen active" id="screen-home">
+  <div class="game-header">
+    <div class="game-logo">Imposter<span>Finder</span></div>
+    <div class="game-tagline">ओळखा कोण आहे खोटारडा!</div>
+  </div>
+
+  <!-- Language Toggle -->
+  <div class="lang-toggle-wrap">
+    <div>
+      <div class="lang-label">Word Language</div>
+      <div class="lang-sublabel">Categories & words</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div class="toggle-labels">
+        <span class="toggle-opt active" id="lbl-en">EN</span>
+        <span class="toggle-opt" id="lbl-mr">मराठी</span>
+      </div>
+      <div class="toggle-track" id="langToggle" onclick="toggleLanguage()">
+        <div class="toggle-thumb"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Players & Imposters -->
+  <div class="card">
+    <div class="card-title">Players & Imposters</div>
+    <div class="num-control">
+      <div class="num-label">Players <small>3 to 20</small></div>
+      <div class="num-stepper">
+        <button class="num-btn" onclick="change('players',-1)">−</button>
+        <div class="num-val" id="val-players">5</div>
+        <button class="num-btn" onclick="change('players',1)">+</button>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div style="height:12px"></div>
+    <div class="num-control">
+      <div class="num-label">Imposters <small>1 to 3</small></div>
+      <div class="num-stepper">
+        <button class="num-btn" onclick="change('imposters',-1)">−</button>
+        <div class="num-val" id="val-imposters">1</div>
+        <button class="num-btn" onclick="change('imposters',1)">+</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Categories -->
+  <div class="card">
+    <div class="card-title">Select Categories</div>
+    <div class="select-all-row">
+      <button class="select-all-btn" onclick="toggleAll()">Select All / None</button>
+    </div>
+    <div class="cat-grid" id="catGrid"></div>
+  </div>
+
+  <div class="error-msg" id="homeError">Please select at least one category!</div>
+  <div style="height:8px"></div>
+  <button class="btn btn-primary" onclick="startGame()">🎮 Start Game</button>
+</div>
+
+<!-- SCREEN 2: PASS TO PLAYER -->
+<div class="screen" id="screen-pass">
+  <div class="pass-screen-content">
+    <div class="player-badge">👤</div>
+    <div>
+      <div class="pass-title" id="passTitle">Player 1's Turn</div>
+      <div class="pass-sub">Pass the phone to this player</div>
+    </div>
+    <div class="progress-dots" id="progressDots"></div>
+    <div class="pass-instruction">
+      📵 Others look away!<br>Only <strong id="passName">Player 1</strong> should see the next screen.
+    </div>
+    <button class="btn btn-primary" onclick="showWord()" style="width:100%">👁️ I'm Ready — Show My Word</button>
+  </div>
+</div>
+
+<!-- SCREEN 3: WORD REVEAL -->
+<div class="screen" id="screen-word">
+  <div class="word-reveal-box">
+    <div id="wordContent"></div>
+    <div style="width:100%">
+      <button class="btn btn-secondary" onclick="doneViewing()">✅ Got It — Pass the Phone</button>
+    </div>
+    <div style="font-size:0.78rem;color:#bbb;text-align:center;">Memorize your word, then pass the phone face-down.</div>
+  </div>
+</div>
+
+<!-- SCREEN 4: DISCUSSION -->
+<div class="screen" id="screen-discuss">
+  <div class="discuss-content">
+    <div class="discuss-icon">🗣️</div>
+    <div class="discuss-title">Time to Discuss!</div>
+    <div class="discuss-rules">
+      <div class="rule-item"><div class="rule-num">1</div><div>Everyone takes turns giving a clue about their word.</div></div>
+      <div class="rule-item"><div class="rule-num">2</div><div>Do <strong>NOT</strong> say the exact word — be clever!</div></div>
+      <div class="rule-item"><div class="rule-num">3</div><div>Imposters will bluff — try to catch them!</div></div>
+      <div class="rule-item"><div class="rule-num">4</div><div>After discussion, vote verbally on who you think is the Imposter.</div></div>
+    </div>
+    <button class="btn btn-red" onclick="showReveal()">🎭 Reveal Imposter & Word</button>
+    <button class="btn btn-secondary" onclick="goHome()">🏠 Back to Home</button>
+  </div>
+</div>
+
+<!-- SCREEN 5: REVEAL -->
+<div class="screen" id="screen-reveal">
+  <div class="game-header">
+    <div class="game-logo" style="font-size:1.6rem">The Reveal 🎭</div>
+  </div>
+  <div class="reveal-content">
+    <div class="reveal-word-box">
+      <div class="reveal-word-label">THE SECRET WORD WAS</div>
+      <div class="reveal-word" id="revealWord"></div>
+      <div class="reveal-word-en" id="revealWordEn"></div>
+    </div>
+    <div class="imposters-box">
+      <div class="imposters-title">🔴 Imposters</div>
+      <div class="imposter-list" id="imposterList"></div>
+    </div>
+    <div class="safe-players-box">
+      <div class="safe-title">✅ Safe Players</div>
+      <div class="safe-list" id="safeList"></div>
+    </div>
+    <button class="btn btn-green" onclick="playAgain()">🔁 Play Again (Same Settings)</button>
+    <button class="btn btn-secondary" onclick="goHome()">🏠 Back to Home</button>
+  </div>
+</div>
+
+<script>
+// ===================== DATA =====================
+const CATEGORIES = [
+  {
+    id: 'fruits', emoji: '🍎',
+    nameEn: 'Fruits', nameMr: 'फळे',
+    wordsEn: ['Mango','Banana','Guava','Custard Apple','Jackfruit','Papaya','Coconut','Tamarind','Jamun','Fig','Chikoo','Orange','Lemon','Pineapple','Watermelon'],
+    wordsMr: ['आंबा','केळ','पेरू','सीताफळ','फणस','पपई','नारळ','चिंच','जांभूळ','अंजीर','चिकू','संत्र','लिंबू','अननस','कलिंगड']
+  },
+  {
+    id: 'animals', emoji: '🐾',
+    nameEn: 'Animals', nameMr: 'प्राणी',
+    wordsEn: ['Cow','Ox','Buffalo','Hen','Goat','Dog','Cat','Crow','Parrot','Sparrow','Monkey','Donkey','Pig','Horse'],
+    wordsMr: ['गाय','बैल','म्हैस','कोंबडी','शेळी','कुत्रा','मांजर','कावळा','पोपट','चिमणी','माकड','गाढव','डुक्कर','घोडा']
+  },
+  {
+    id: 'food', emoji: '🍽️',
+    nameEn: 'Food', nameMr: 'खाद्यपदार्थ',
+    wordsEn: ['Modak','Shira','Chakli','Puran Poli','Vada Pav','Misal','Bhakri','Sabudana Khichdi','Kande Pohe','Pithla','Thalipeeth','Batatavada','Shev Bhaji','Aamras'],
+    wordsMr: ['मोदक','शिरा','चकली','पुरणपोळी','वडापाव','मिसळ','भाकरी','साबुदाणा खिचडी','कांदेपोहे','पिठलं','थालीपीठ','बटाटावडा','शेव भाजी','आमरस']
+  },
+  {
+    id: 'objects', emoji: '🏺',
+    nameEn: 'Objects', nameMr: 'वस्तू',
+    wordsEn: ['Winnowing Fan','Wooden Spoon','Grinding Stone','Broom','Bucket','Mat','Basket','Mortar-Pestle','Sickle','Plough'],
+    wordsMr: ['उलथणे','पाटा-वरवंटा','झाडू','बादली','चटई','टोपली','उखळ-मुसळ','विळी','नांगर']
+  },
+  {
+    id: 'places', emoji: '🌍',
+    nameEn: 'Places', nameMr: 'ठिकाणे',
+    wordsEn: ['Pune','Nashik','Kolhapur','Aurangabad','Nagpur','Mumbai','Satara','Solapur','Ratnagiri','Konkan','Pandharpur','Shirdi','Trimbakeshwar','Akluj','Sindhudurg'],
+    wordsMr: ['पुणे','नाशिक','कोल्हापूर','औरंगाबाद','नागपूर','मुंबई','सातारा','सोलापूर','रत्नागिरी','कोकण','पंढरपूर','शिर्डी','त्र्यंबकेश्वर','अकलूज','सिंधुदुर्ग']
+  },
+  {
+    id: 'sports', emoji: '⚽',
+    nameEn: 'Sports', nameMr: 'खेळ',
+    wordsEn: ['Kabaddi','Viti-Dandu','Lagori','Cricket','Kho-Kho','Wrestling','Carrom','Gilli-Danda','Spinning Top','Marbles','Hopscotch','Tug of War','Chess','Gotya','Langdi'],
+    wordsMr: ['कबड्डी','विटी-दांडू','लगोरी','क्रिकेट','खो-खो','कुस्ती','कॅरम','गिल्ली-दांडा','भोवरा','गोट्या','आट्यापाट्या','दोरीखेच','बुद्धिबळ','गोट्या','लंगडी']
+  },
+  {
+    id: 'jobs', emoji: '💼',
+    nameEn: 'Jobs', nameMr: 'व्यवसाय',
+    wordsEn: ['Farmer','Potter','Carpenter','Shopkeeper','Blacksmith','Washerman','Barber','Weaver','Fisherman','Milkman','Teacher','Doctor','Priest','Cobbler','Shepherd'],
+    wordsMr: ['शेतकरी','कुंभार','सुतार','दुकानदार','लोहार','धोबी','न्हावी','विणकर','कोळी','दूधवाला','शिक्षक','डॉक्टर','पुजारी','चांभार','मेंढपाळ']
+  },
+  {
+    id: 'festivals', emoji: '🎉',
+    nameEn: 'Festivals', nameMr: 'सण समारंभ',
+    wordsEn: ['Ganesh Chaturthi','Diwali','Holi','Gudi Padwa','Makar Sankranti','Navratri','Dasara','Bail Pola','Akshay Tritiya','Ashadhi Ekadashi','Kojagiri','Tulsi Vivah','Hartalika','Vat Purnima','Shimga'],
+    wordsMr: ['गणेशोत्सव','दिवाळी','होळी','गुढीपाडवा','मकरसंक्रांती','नवरात्री','दसरा','बैल पोळा','अक्षय तृतीया','आषाढी एकादशी','कोजागिरी','तुळशी विवाह','हरतालिका','वटपौर्णिमा','शिमगा']
+  },
+  {
+    id: 'dailyitems', emoji: '🧴',
+    nameEn: 'Daily Items', nameMr: 'दैनंदिन वापराच्या वस्तू',
+    wordsEn: ['Chappals','Tiffin Box','Water Pot','Broom','Soap','Oil Lamp','Comb','Mirror','Plate','Tumbler','Towel','Matchbox','Rope Cot','Grinding Stone','Umbrella'],
+    wordsMr: ['चपला','डबा','कळशी','केरसुणी','साबण','दिवा','कंगवा','आरसा','ताट','तांब्या','टॉवेल','काडेपेटी','खाट','जाते','छत्री']
+  }
+];
+
+// ===================== STATE =====================
+let state = {
+  lang: 'en',      // 'en' or 'mr'
+  players: 5,
+  imposters: 1,
+  selectedCats: ['fruits','animals','food'],
+  // game state
+  playerOrder: [],    // array of player numbers (1-based)
+  imposterIndexes: [], // which positions in playerOrder are imposters
+  currentPlayerIdx: 0,
+  secretWord: { en: '', mr: '' },
+  categoryName: { en: '', mr: '' }
+};
+
+// ===================== INIT =====================
+function init() {
+  renderCategories();
+  updateNums();
+}
+
+function renderCategories() {
+  const grid = document.getElementById('catGrid');
+  grid.innerHTML = '';
+  CATEGORIES.forEach(cat => {
+    const sel = state.selectedCats.includes(cat.id);
+    const name = state.lang === 'mr' ? cat.nameMr : cat.nameEn;
+    grid.innerHTML += `
+      <div class="cat-item ${sel ? 'selected' : ''}" onclick="toggleCat('${cat.id}')">
+        <span class="cat-emoji">${cat.emoji}</span>
+        <div class="cat-name">${name}</div>
+        <div class="cat-check">${sel ? '✓' : ''}</div>
+      </div>`;
+  });
+}
+
+function toggleCat(id) {
+  if (state.selectedCats.includes(id)) {
+    state.selectedCats = state.selectedCats.filter(c => c !== id);
+  } else {
+    state.selectedCats.push(id);
+  }
+  renderCategories();
+}
+
+function toggleAll() {
+  if (state.selectedCats.length === CATEGORIES.length) {
+    state.selectedCats = [];
+  } else {
+    state.selectedCats = CATEGORIES.map(c => c.id);
+  }
+  renderCategories();
+}
+
+function toggleLanguage() {
+  state.lang = state.lang === 'en' ? 'mr' : 'en';
+  const track = document.getElementById('langToggle');
+  const lblEn = document.getElementById('lbl-en');
+  const lblMr = document.getElementById('lbl-mr');
+  if (state.lang === 'mr') {
+    track.classList.add('on');
+    lblEn.classList.remove('active');
+    lblMr.classList.add('active');
+  } else {
+    track.classList.remove('on');
+    lblEn.classList.add('active');
+    lblMr.classList.remove('active');
+  }
+  renderCategories();
+}
+
+function change(field, delta) {
+  if (field === 'players') {
+    state.players = Math.max(3, Math.min(20, state.players + delta));
+    // Ensure imposters < players
+    if (state.imposters >= state.players) state.imposters = state.players - 1;
+  } else {
+    state.imposters = Math.max(1, Math.min(3, state.imposters + delta));
+    if (state.imposters >= state.players) state.imposters = state.players - 1;
+  }
+  updateNums();
+}
+
+function updateNums() {
+  document.getElementById('val-players').textContent = state.players;
+  document.getElementById('val-imposters').textContent = state.imposters;
+}
+
+// ===================== GAME LOGIC =====================
+function startGame() {
+  if (state.selectedCats.length === 0) {
+    const err = document.getElementById('homeError');
+    err.style.display = 'block';
+    setTimeout(() => err.style.display = 'none', 3000);
+    return;
+  }
+
+  // Pick a random category and word
+  const availCats = CATEGORIES.filter(c => state.selectedCats.includes(c.id));
+  const cat = availCats[Math.floor(Math.random() * availCats.length)];
+  const wordIdx = Math.floor(Math.random() * cat.wordsEn.length);
+  state.secretWord = { en: cat.wordsEn[wordIdx], mr: cat.wordsMr[wordIdx] };
+  state.categoryName = { en: cat.nameEn, mr: cat.nameMr };
+
+  // Assign player order and imposters
+  state.playerOrder = Array.from({length: state.players}, (_, i) => i + 1);
+  // Shuffle to randomize imposter positions
+  const shuffled = [...state.playerOrder].sort(() => Math.random() - 0.5);
+  state.imposterIndexes = shuffled.slice(0, state.imposters).map(p => p - 1); // player numbers (1-based) of imposters
+
+  state.currentPlayerIdx = 0;
+  showPassScreen();
+  showScreen('screen-pass');
+}
+
+function showPassScreen() {
+  const playerNum = state.playerOrder[state.currentPlayerIdx];
+  document.getElementById('passTitle').textContent = `Player ${playerNum}'s Turn`;
+  document.getElementById('passName').textContent = `Player ${playerNum}`;
+
+  // Progress dots
+  const dots = document.getElementById('progressDots');
+  dots.innerHTML = '';
+  state.playerOrder.forEach((_, i) => {
+    const cls = i < state.currentPlayerIdx ? 'dot done' : i === state.currentPlayerIdx ? 'dot current' : 'dot';
+    dots.innerHTML += `<div class="${cls}"></div>`;
+  });
+}
+
+function showWord() {
+  const playerNum = state.playerOrder[state.currentPlayerIdx];
+  const isImposter = state.imposterIndexes.includes(playerNum - 1);
+  const catLabel = state.lang === 'mr' ? state.categoryName.mr : state.categoryName.nameEn || state.categoryName.en;
+
+  let html = '';
+  if (isImposter) {
+    html = `
+      <div class="word-card imposter-card" style="width:100%">
+        <div class="word-label">You Are</div>
+        <div class="word-text">🔴 IMPOSTER</div>
+        <div class="imposter-hint">Bluff your way through — don't get caught!</div>
+      </div>`;
+  } else {
+    const word = state.lang === 'mr' ? state.secretWord.mr : state.secretWord.en;
+    const altWord = state.lang === 'mr' ? state.secretWord.en : state.secretWord.mr;
+    const catName = state.lang === 'mr' ? state.categoryName.mr : state.categoryName.en;
+    html = `
+      <div class="category-tag">${catName}</div>
+      <div class="word-card" style="width:100%">
+        <div class="word-label">Your Word</div>
+        <div class="word-text">${word}</div>
+        <div style="font-size:0.82rem;color:#bbb;margin-top:8px;">${altWord}</div>
+      </div>`;
+  }
+
+  document.getElementById('wordContent').innerHTML = html;
+  showScreen('screen-word');
+}
+
+function doneViewing() {
+  state.currentPlayerIdx++;
+  if (state.currentPlayerIdx < state.playerOrder.length) {
+    showPassScreen();
+    showScreen('screen-pass');
+  } else {
+    showScreen('screen-discuss');
+  }
+}
+
+function showReveal() {
+  // Word
+  document.getElementById('revealWord').textContent = state.lang === 'mr' ? state.secretWord.mr : state.secretWord.en;
+  document.getElementById('revealWordEn').textContent = state.lang === 'mr' ? state.secretWord.en : state.secretWord.mr;
+
+  // Imposters
+  const impList = document.getElementById('imposterList');
+  impList.innerHTML = '';
+  state.imposterIndexes.forEach(idx => {
+    impList.innerHTML += `<div class="imposter-badge">Player ${idx + 1}</div>`;
+  });
+
+  // Safe players
+  const safeList = document.getElementById('safeList');
+  safeList.innerHTML = '';
+  state.playerOrder.forEach(p => {
+    if (!state.imposterIndexes.includes(p - 1)) {
+      safeList.innerHTML += `<div class="safe-badge">Player ${p}</div>`;
+    }
+  });
+
+  showScreen('screen-reveal');
+}
+
+function playAgain() {
+  startGame();
+}
+
+function goHome() {
+  showScreen('screen-home');
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+init();
+</script>
+</body>
+</html>
